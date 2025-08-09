@@ -1,0 +1,32 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug Next.js",
+			"type": "node-terminal",
+			"request": "launch",
+			"command": "pnpm dev"
+		},
+		{
+			"name": "Launch Chrome against localhost",
+			"type": "chrome",
+			"request": "launch",
+			"url": "http://localhost:3000",
+			"webRoot": "${workspaceFolder}",
+			"serverReadyAction": {
+				"pattern": "ready started server on .+",
+				"uriFormat": "http://localhost:3000",
+				"action": "openExternally"
+			}
+		}
+	],
+	"compounds": [
+		{
+			"name": "Next.js Full Debug",
+			"configurations": [
+				"Debug Next.js",
+				"Launch Chrome against localhost"
+			]
+		}
+	]
+}

@@ -2,30 +2,51 @@ import type { Metadata } from 'next'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
+import { ThemeProvider } from "@/components/theme-provider";
+import Navigation from "@/components/Navigation";
+import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
-}
+	title: "Portfolio",
+	description: "Portfolio",
+	authors: [
+		{
+			name: "Pedro Arenas",
+			url: "https://www.pedroarenas.com",
+		},
+	],
+	creator: "Pedro Arenas",
+	publisher: "Pedro Arenas",
+	robots: { index: true, follow: true },
+	openGraph: {
+		title: "Portfolio",
+		description: "Portfolio",
+	},
+};
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <head>
-        <style>{`
-html {
-  font-family: ${GeistSans.style.fontFamily};
-  --font-sans: ${GeistSans.variable};
-  --font-mono: ${GeistMono.variable};
-}
-        `}</style>
-      </head>
-      <body>{children}</body>
-    </html>
-  )
+	return (
+		<html
+			lang="en"
+			suppressHydrationWarning
+			className={`${GeistSans.variable} ${GeistMono.variable}`}
+		>
+			<body className="min-h-screen bg-background">
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="dark"
+					enableSystem={false}
+					disableTransitionOnChange
+				>
+					<Navigation />
+					<main>{children}</main>
+					<SiteFooter />
+				</ThemeProvider>
+			</body>
+		</html>
+	);
 }
