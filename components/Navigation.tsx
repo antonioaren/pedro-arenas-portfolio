@@ -1,41 +1,153 @@
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+
+type SectionId = "about" | "projects" | "skills" | "contact";
+
 export default function Navigation() {
-  return (
-		<nav className="fixed top-0 w-full bg-background/80 backdrop-blur-sm border-b z-50">
-			<div className="container mx-auto px-4 py-4">
-				<div className="flex justify-between items-center">
-					<h1 className="text-2xl font-bold tracking-tight">
-						Pedro Arenas
-					</h1>
-					<div className="hidden md:flex space-x-6">
-						<a
-							href="#about"
-							className="text-sm font-semibold uppercase tracking-[0.02em] hover:text-primary transition-colors"
-						>
-							About
-						</a>
-						<a
-							href="#projects"
-							className="text-sm font-semibold uppercase tracking-[0.02em] hover:text-primary transition-colors"
-						>
-							Projects
-						</a>
-						<a
-							href="#skills"
-							className="text-sm font-semibold uppercase tracking-[0.02em] hover:text-primary transition-colors"
-						>
-							Skills
-						</a>
-						<a
-							href="#contact"
-							className="text-sm font-semibold uppercase tracking-[0.02em] hover:text-primary transition-colors"
-						>
-							Contact
-						</a>
+	const navRef = useRef<HTMLElement | null>(null);
+	const [navHeight, setNavHeight] = useState<number>(64);
+	const [activeSection, setActiveSection] = useState<SectionId>("about");
+	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
+	const lastScrollRef = useRef<number>(0);
+
+	const sections: SectionId[] = useMemo(
+		() => ["about", "projects", "skills", "contact"],
+		[]
+	);
+
+	useEffect(() => {
+		// Measure nav height
+		const measure = () => {
+			const h = navRef.current?.offsetHeight ?? 64;
+			setNavHeight(h);
+		};
+		measure();
+		window.addEventListener("resize", measure);
+		return () => window.removeEventListener("resize", measure);
+	}, []);
+
+	useEffect(() => {
+		// Scroll direction + scrollspy
+		let ticking = false;
+		let sectionOffsets: Record<SectionId, number> = {
+			about: 0,
+			projects: 0,
+			skills: 0,
+			contact: 0,
+		};
+
+		const computeOffsets = () => {
+			sections.forEach((id) => {
+				const el = document.getElementById(id);
+				if (el) {
+					const rect = el.getBoundingClientRect();
+					sectionOffsets[id] = Math.max(0, rect.top + window.scrollY);
+				}
+			});
+		};
+
+		const onScroll = () => {
+			const currentY = window.scrollY;
+			if (ticking) return;
+
+			window.requestAnimationFrame(() => {
+				// Show mobile secondary menu when scrolling down and not at very top
+				const lastY = lastScrollRef.current;
+				const isScrollingDown = currentY > lastY;
+				const beyondTop = currentY > 8;
+				setShowMobileMenu(isScrollingDown && beyondTop);
+				lastScrollRef.current = currentY;
+
+				// Scrollspy: find last section whose offset is above current position + nav offset
+				const offset = currentY + navHeight + 12; // small gap
+				let current: SectionId = sections[0];
+				for (const id of sections) {
+					const top = sectionOffsets[id] ?? 0;
+					if (top <= offset) current = id;
+				}
+				if (current !== activeSection) setActiveSection(current);
+
+				ticking = false;
+			});
+			ticking = true;
+		};
+
+		computeOffsets();
+		onScroll();
+		window.addEventListener("scroll", onScroll, { passive: true });
+		window.addEventListener("resize", computeOffsets);
+		window.addEventListener("orientationchange", computeOffsets);
+		return () => {
+			window.removeEventListener("scroll", onScroll as EventListener);
+			window.removeEventListener("resize", computeOffsets);
+			window.removeEventListener("orientationchange", computeOffsets);
+		};
+	}, [activeSection, navHeight, sections]);
+
+	const linkBase =
+		"text-sm font-semibold uppercase tracking-[0.02em] transition-colors whitespace-nowrap";
+
+	const renderLink = (id: SectionId, label: string) => (
+		<a
+			key={id}
+			href={`#${id}`}
+			className={
+				activeSection === id
+					? `${linkBase} text-primary border-b-2 border-primary pb-1`
+					: `${linkBase} hover:text-primary text-foreground/80`
+			}
+		>
+			{label}
+		</a>
+	);
+
+	return (
+		<>
+			<nav
+				ref={navRef}
+				className="fixed top-0 w-full bg-background/80 backdrop-blur-sm border-b z-50"
+			>
+				<div className="container mx-auto px-4 py-4">
+					<div className="flex justify-between items-center">
+						<h1 className="text-2xl font-bold tracking-tight flex items-center space-x-2">
+							<img
+								src="/logo.svg"
+								alt="Pedro Arenas"
+								width={40}
+								height={30}
+							/>
+							<span>Pedro Arenas</span>
+						</h1>
+						<div className="hidden md:flex space-x-6">
+							{renderLink("about", "About")}
+							{renderLink("projects", "Projects")}
+							{renderLink("skills", "Skills")}
+							{renderLink("contact", "Contact")}
+						</div>
+					</div>
+				</div>
+			</nav>
+
+			{/* Mobile-only secondary menu that slides in when scrolling down */}
+			<div
+				style={{ top: navHeight }}
+				className={
+					"fixed left-0 right-0 z-40 md:hidden transition-transform duration-600 ease-in-out " +
+					(showMobileMenu ? "translate-y-0" : "-translate-y-full")
+				}
+			>
+				<div className="bg-background/95 backdrop-blur-sm border-b">
+					<div className="container mx-auto px-4">
+						<div className="flex items-center gap-6 overflow-x-auto no-scrollbar py-3">
+							{renderLink("about", "About")}
+							{renderLink("projects", "Projects")}
+							{renderLink("skills", "Skills")}
+							{renderLink("contact", "Contact")}
+						</div>
 					</div>
 				</div>
 			</div>
-		</nav>
-  );
+		</>
+	);
 }
-
-

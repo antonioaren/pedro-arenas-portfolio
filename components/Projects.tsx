@@ -137,8 +137,8 @@ const projectComponent: ProjectComponent = {
 };
 
 export default function Projects() {
-	return (
-		<section id="projects" className="py-16 px-4 bg-muted/30">
+    return (
+		<section id="projects" className="scroll-mt-24 py-16 px-4 bg-muted/30">
 			<div className="container mx-auto max-w-6xl">
 				<div className="text-center mb-12">
 					<h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">

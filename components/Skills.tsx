@@ -78,8 +78,8 @@ const skillsInfo: SkillsInfo = {
 };
 
 export default function Skills() {
-	return (
-		<section id="skills" className="py-16 px-4">
+    return (
+		<section id="skills" className="scroll-mt-24 py-16 px-4">
 			<div className="container mx-auto max-w-4xl">
 				<div className="text-center mb-12">
 					<h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">

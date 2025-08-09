@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="48" viewBox="0 0 200 48" fill="none">
   <!-- Dollar icon -->
-  <g transform="translate(0,8)" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <g transform="translate(38,8)" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <line x1="12" x2="12" y1="0" y2="24"></line>
     <path d="M17 3H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
   </g>
 
   <!-- Text -->
-  <text x="40" y="26" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="22" fill="white">
+  <text x="78" y="26" font-family="Inter, Arial, sans-serif" font-weight="700" font-size="22" fill="white">
     Dollar
   </text>
 </svg>

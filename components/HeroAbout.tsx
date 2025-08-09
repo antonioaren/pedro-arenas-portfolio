@@ -76,8 +76,8 @@ const About: AboutInfo = {
 };
 
 export default function HeroAbout() {
-	return (
-		<section id="about" className="pt-20 pb-16 px-4">
+    return (
+		<section id="about" className="scroll-mt-24 pt-[8rem] pb-10 px-4">
 			<div className="container mx-auto max-w-4xl">
 				<div className="grid md:grid-cols-2 gap-12 items-center">
 					<div>
