@@ -121,6 +121,7 @@ export default function HeroAbout() {
 										key={social.type}
 										href={social.href}
 										className="text-muted-foreground hover:text-primary transition-colors"
+										target={social.target}
 									>
 										<Icon className="w-6 h-6" />
 									</Link>
