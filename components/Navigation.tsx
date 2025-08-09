@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useAnimeInView } from "@/hooks/use-anime-in-view";
 
 type SectionId = "about" | "projects" | "skills" | "contact";
 
@@ -10,6 +11,8 @@ export default function Navigation() {
 	const [activeSection, setActiveSection] = useState<SectionId>("about");
 	const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
 	const lastScrollRef = useRef<number>(0);
+	const brandRef = useRef<HTMLHeadingElement | null>(null);
+	const linksRef = useRef<HTMLDivElement | null>(null);
 
 	const sections: SectionId[] = useMemo(
 		() => ["about", "projects", "skills", "contact"],
@@ -85,6 +88,37 @@ export default function Navigation() {
 		};
 	}, [activeSection, navHeight, sections]);
 
+	// Entrance animation for brand and links
+	useAnimeInView(
+		brandRef,
+		(anime, el) => {
+			const { animate } = anime;
+			animate(el, {
+				translateY: [-10, 0],
+				opacity: [0, 1],
+				easing: "easeOutExpo",
+				duration: 600,
+			});
+		},
+		{ threshold: 0.9 }
+	);
+
+	useAnimeInView(
+		linksRef,
+		(anime, el) => {
+			const items = el.querySelectorAll("a");
+			const { animate, stagger } = anime;
+			animate(items, {
+				translateY: [-12, 0],
+				opacity: [0, 1],
+				easing: "easeOutExpo",
+				duration: 550,
+				delay: stagger(70),
+			});
+		},
+		{ threshold: 0.9 }
+	);
+
 	const linkBase =
 		"text-sm font-semibold uppercase tracking-[0.02em] transition-colors whitespace-nowrap";
 
@@ -110,7 +144,10 @@ export default function Navigation() {
 			>
 				<div className="container mx-auto px-4 py-4">
 					<div className="flex justify-between items-center">
-						<h1 className="text-2xl font-bold tracking-tight flex items-center space-x-2">
+						<h1
+							ref={brandRef}
+							className="text-2xl font-bold tracking-tight flex items-center space-x-2"
+						>
 							<img
 								src="/logo.svg"
 								alt="Pedro Arenas"
@@ -119,7 +156,10 @@ export default function Navigation() {
 							/>
 							<span>Pedro Arenas</span>
 						</h1>
-						<div className="hidden md:flex space-x-6">
+						<div
+							ref={linksRef}
+							className="hidden md:flex space-x-6"
+						>
 							{renderLink("about", "About")}
 							{renderLink("projects", "Projects")}
 							{renderLink("skills", "Skills")}

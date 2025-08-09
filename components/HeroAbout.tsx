@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { loadAnime } from "@/lib/loadAnime";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -76,21 +80,113 @@ const About: AboutInfo = {
 };
 
 export default function HeroAbout() {
-    return (
+	const headingRef = useRef<HTMLHeadingElement | null>(null);
+	const descriptionRef = useRef<HTMLParagraphElement | null>(null);
+	const ctasRef = useRef<HTMLDivElement | null>(null);
+	const socialsRef = useRef<HTMLDivElement | null>(null);
+	const imageWrapperRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		let disposed = false;
+		const run = async () => {
+			const { createTimeline, animate, stagger } = await loadAnime();
+			if (disposed) return;
+
+			// Timeline for hero left column
+			const tl = createTimeline({ autoplay: true });
+
+			if (headingRef.current) {
+				tl.add({
+					targets: headingRef.current.childNodes,
+					translateY: [24, 0],
+					opacity: [0, 1],
+					easing: "easeOutExpo",
+					duration: 700,
+					delay: stagger(60),
+				});
+			}
+
+			if (descriptionRef.current) {
+				tl.add(
+					{
+						targets: descriptionRef.current,
+						translateY: [12, 0],
+						opacity: [0, 1],
+						easing: "easeOutExpo",
+						duration: 600,
+					},
+					"-=300"
+				);
+			}
+
+			if (ctasRef.current) {
+				const buttons = ctasRef.current.querySelectorAll("a, button");
+				tl.add(
+					{
+						targets: buttons,
+						translateY: [16, 0],
+						opacity: [0, 1],
+						easing: "easeOutExpo",
+						duration: 500,
+						delay: stagger(80),
+					},
+					"-=200"
+				);
+			}
+
+			if (socialsRef.current) {
+				const icons = socialsRef.current.querySelectorAll("svg");
+				tl.add(
+					{
+						targets: icons,
+						scale: [0.8, 1],
+						opacity: [0, 1],
+						easing: "easeOutBack",
+						duration: 500,
+						delay: stagger(70),
+					},
+					"-=200"
+				);
+			}
+
+			if (imageWrapperRef.current) {
+				animate(imageWrapperRef.current, {
+					translateY: [24, 0],
+					scale: [0.96, 1],
+					opacity: [0, 1],
+					easing: "easeOutExpo",
+					duration: 900,
+					delay: 150,
+				});
+			}
+		};
+		run();
+		return () => {
+			disposed = true;
+		};
+	}, []);
+
+	return (
 		<section id="about" className="scroll-mt-24 pt-[8rem] pb-10 px-4">
 			<div className="container mx-auto max-w-4xl">
 				<div className="grid md:grid-cols-2 gap-12 items-center">
 					<div>
-						<h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+						<h2
+							ref={headingRef}
+							className="text-4xl md:text-6xl font-bold tracking-tight mb-6"
+						>
 							{About.titleMain}
 							<span className="text-primary block">
 								{About.titleAccent}
 							</span>
 						</h2>
-						<p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+						<p
+							ref={descriptionRef}
+							className="text-lg text-muted-foreground mb-8 leading-relaxed"
+						>
 							{About.description}
 						</p>
-						<div className="flex space-x-4">
+						<div ref={ctasRef} className="flex space-x-4">
 							{About.ctas.map((cta) => (
 								<Button
 									key={cta.label}
@@ -113,7 +209,7 @@ export default function HeroAbout() {
 								</Button>
 							))}
 						</div>
-						<div className="flex space-x-4 mt-8">
+						<div ref={socialsRef} className="flex space-x-4 mt-8">
 							{About.socials.map((social) => {
 								const Icon = socialIconByType[social.type];
 								return (
@@ -131,7 +227,8 @@ export default function HeroAbout() {
 					</div>
 					<div className="relative">
 						<div
-							className={`aspect-square rounded-2xl bg-gradient-to-br ${About.imageGradientFromTo} p-8`}
+							ref={imageWrapperRef}
+							className={`aspect-square rounded-2xl bg-gradient-to-br ${About.imageGradientFromTo} p-8 opacity-0`}
 						>
 							<Image
 								src={About.image.src}
@@ -147,5 +244,3 @@ export default function HeroAbout() {
 		</section>
 	);
 }
-
-
