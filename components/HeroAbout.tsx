@@ -24,6 +24,7 @@ type AboutInfo = {
 	socials: Array<{
 		type: SocialType;
 		href: string;
+		target?: "_blank" | "_self" | "_parent" | "_top";
 	}>;
 	image: {
 		src: string;
@@ -49,15 +50,27 @@ const About: AboutInfo = {
 		},
 	],
 	socials: [
-		{ type: "github", href: "https://github.com" },
-		{ type: "linkedin", href: "https://linkedin.com" },
-		{ type: "email", href: "mailto:pedro@example.com" },
+		{
+			type: "github",
+			href: "https://github.com/antonioaren",
+			target: "_blank",
+		},
+		{
+			type: "linkedin",
+			href: "https://linkedin.com/in/antonioaren",
+			target: "_blank",
+		},
+		{
+			type: "email",
+			href: "mailto:antonioaren2@gmail.com",
+			target: "_blank",
+		},
 	],
 	image: {
-		src: "/placeholder.svg?height=400&width=400",
-		alt: "Alex Johnson",
-		width: 400,
-		height: 400,
+		src: "/me.png",
+		alt: "Antonio Arenas",
+		width: 337,
+		height: 337,
 	},
 	imageGradientFromTo: "from-primary/20 to-primary/5",
 };
@@ -68,7 +81,7 @@ export default function HeroAbout() {
 			<div className="container mx-auto max-w-4xl">
 				<div className="grid md:grid-cols-2 gap-12 items-center">
 					<div>
-						<h2 className="text-4xl md:text-6xl font-bold mb-6">
+						<h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
 							{About.titleMain}
 							<span className="text-primary block">
 								{About.titleAccent}
@@ -124,7 +137,7 @@ export default function HeroAbout() {
 								alt={About.image.alt}
 								width={About.image.width}
 								height={About.image.height}
-								className="rounded-xl object-cover w-full h-full"
+								className="rounded-xl object-cover w-full h-auto"
 							/>
 						</div>
 					</div>

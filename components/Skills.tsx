@@ -82,10 +82,10 @@ export default function Skills() {
 		<section id="skills" className="py-16 px-4">
 			<div className="container mx-auto max-w-4xl">
 				<div className="text-center mb-12">
-					<h2 className="text-3xl md:text-4xl font-bold mb-4">
+					<h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
 						{skillsInfo.heading}
 					</h2>
-					<p className="text-lg text-muted-foreground">
+					<p className="text-lg text-muted-foreground leading-relaxed">
 						{skillsInfo.subheading}
 					</p>
 				</div>
@@ -98,7 +98,7 @@ export default function Skills() {
 								<div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
 									<Icon className="w-8 h-8 text-primary" />
 								</div>
-								<h3 className="text-xl font-semibold mb-4">
+								<h3 className="text-xl font-semibold tracking-tight mb-4">
 									{category.title}
 								</h3>
 								<div className="space-y-2">
@@ -106,7 +106,7 @@ export default function Skills() {
 										<Badge
 											key={skill}
 											variant="outline"
-											className="mr-2 mb-2"
+											className="mr-2 mb-2 font-mono text-xs uppercase tracking-wide"
 										>
 											{skill}
 										</Badge>

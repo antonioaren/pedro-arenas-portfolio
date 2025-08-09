@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import './globals.css'
+import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navigation from "@/components/Navigation";
 import SiteFooter from "@/components/SiteFooter";
@@ -24,6 +23,20 @@ export const metadata: Metadata = {
 	},
 };
 
+const plusJakarta = Plus_Jakarta_Sans({
+	subsets: ["latin"],
+	variable: "--font-sans",
+	display: "swap",
+	weight: "variable",
+});
+
+const jetBrainsMono = JetBrains_Mono({
+	subsets: ["latin"],
+	variable: "--font-mono",
+	display: "swap",
+	weight: "variable",
+});
+
 export default function RootLayout({
 	children,
 }: Readonly<{
@@ -33,9 +46,9 @@ export default function RootLayout({
 		<html
 			lang="en"
 			suppressHydrationWarning
-			className={`${GeistSans.variable} ${GeistMono.variable}`}
+			className={`${plusJakarta.variable} ${jetBrainsMono.variable}`}
 		>
-			<body className="min-h-screen bg-background">
+			<body className="min-h-screen bg-background font-sans antialiased">
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="dark"

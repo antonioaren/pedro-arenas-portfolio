@@ -10,8 +10,10 @@ type ProjectComponent = {
 	subheading: string;
 	projects: {
 		title: string;
+		jobPosition: string;
+		projectDate: string;
 		description: string;
-		image: { src: string; alt: string };
+		image: { src: string; alt: string; height?: number; width?: number };
 		gradient: string;
 		techStack: string[];
 		links: { github?: string; demo?: string };
@@ -19,53 +21,116 @@ type ProjectComponent = {
 };
 
 const projectComponent: ProjectComponent = {
-	heading: "E-commerce Platform Architecture",
+	heading: "Featured Projects",
 	subheading:
 		"Here are some of my recent projects that showcase my skills and experience in full-stack development.",
 	projects: [
 		{
-			title: "E-commerce Platform Architecture",
+			title: "Udima",
+			jobPosition: "Frontend Developer",
+			projectDate: "2024-2025",
 			description:
-				"Led the technical design and implementation of a scalable e-commerce platform using clean architecture principles, serving thousands of users with high performance.",
+				"Udima is a remote university that allows users to take courses and get information about degrees, masters, phd, etc.",
 			image: {
-				src: "/placeholder.svg?height=200&width=350",
-				alt: "E-commerce Platform",
+				src: "/projects/udima.svg",
+				alt: "Udima",
+				height: 500,
+				width: 500,
 			},
-			gradient: "from-blue-500 to-purple-600",
-			techStack: ["Next.js", "TypeScript", "PostgreSQL", "AWS"],
+			gradient: "from-white to-white",
+			techStack: ["Nuxt 3", "TypeScript", "Github Actions", "Netlify"],
 			links: {
-				github: "https://github.com/antonioaren",
-				demo: "https://demo.com",
+				demo: "https://udima.es",
 			},
 		},
 		{
-			title: "Team Management Dashboard",
+			title: "Tostarica",
+			jobPosition: "Frontend Developer",
+			projectDate: "2025",
 			description:
-				"Built a comprehensive team management system as Tech Lead at Buscorepuestos, leading a team of four developers through the full development lifecycle.",
+				"Tostarica is a platform that allows to sell biscuits in Spain. I had the opportunity to collaborate with the team to make a new website.",
 			image: {
-				src: "/placeholder.svg?height=200&width=350",
-				alt: "Team Management App",
+				src: "/projects/tostarica.webp",
+				alt: "Tostarica",
 			},
-			gradient: "from-green-500 to-teal-600",
-			techStack: ["Vue.js", "Node.js", "MongoDB", "GitHub Actions"],
+			gradient: "from-yellow-500 to-yellow-600",
+			techStack: ["Nuxt 3", "GitHub Actions", "Netlify"],
 			links: {
-				github: "https://github.com/antonioaren",
-				demo: "https://demo.com",
+				demo: "https://tostarica.com",
 			},
 		},
 		{
-			title: "International Freelance Platform",
+			title: "Dollar",
+			jobPosition: "Full Stack Developer",
+			projectDate: "2025",
 			description:
-				"Delivered a complete freelance marketplace from technical design to go-live, handling international payments and multi-language support.",
+				"Dollar is a platform that allows to follow your financial situation and get a better control of your money. This is a side project I decided to do by myself powered by AI.",
 			image: {
-				src: "/placeholder.svg?height=200&width=350",
-				alt: "International Freelance Platform",
+				src: "/projects/dollar.svg",
+				alt: "Dollar",
 			},
-			gradient: "from-orange-500 to-red-600",
-			techStack: ["React", "Django", "DynamoDB", "AWS Lambda"],
+			gradient: "from-purple-500 to-blue-600",
+			techStack: ["Next.js", "TypeScript", "Github Actions", "Vercel"],
 			links: {
-				github: "https://github.com/antonioaren",
-				demo: "https://demo.com",
+				demo: "https://dollar.antonioaren.es",
+				github: "https://github.com/antonioaren/dollar",
+			},
+		},
+		{
+			title: "Buscorepuestos",
+			jobPosition: "Full Stack Developer",
+			projectDate: "2022-2023",
+			description:
+				"Buscorepuestos is an e-commerce platform that scrapes the best products from various sources and sells them on its own website. It finds potential clients, provides detailed information about the products, and handles all aspects of the selling process.",
+			image: {
+				src: "/projects/buscorepuestos.svg",
+				alt: "Buscorepuestos",
+			},
+			gradient: "from-blue-600 to-white",
+			techStack: [
+				"Angular",
+				"Next.js",
+				"TypeScript",
+				"Heroku",
+				"Github Actions",
+				"Vercel",
+				"MongoDB",
+			],
+			links: {
+				demo: "https://buscorepuestos.com",
+				github: "https://github.com/antonioaren/dollar",
+			},
+		},
+		{
+			title: "Credit Agricole Mon Commerce",
+			jobPosition: "Frontend Developer",
+			projectDate: "2022-2023",
+			description:
+				"Credit Agricoles is a bank that allows to manage your finances and get a better control of your money. I had the opportunity to collaborate in his product call Mon Commerce, Mon commerce helps business to contract online services for payments, invoices, etc.",
+			image: {
+				src: "/projects/camc.svg",
+				alt: "Credit Agricole Mon Commerce",
+			},
+			gradient: "from-white to-white",
+			techStack: ["Next.js", "TypeScript", "Github Actions", "Vercel"],
+			links: {
+				demo: "https://www.ca-moncommerce.com/",
+			},
+		},
+		{
+			title: "Agorapay",
+			jobPosition: "Frontend Developer",
+			projectDate: "2022-2023",
+			description:
+				"Agorapay is website for developers that help you to get started including paid pasarel to test payments.",
+			image: {
+				src: "/projects/agorapay.svg",
+				alt: "Agorapay",
+			},
+			gradient: "from-white to-white",
+			techStack: ["Next.js", "TypeScript", "Github Actions", "Vercel"],
+			links: {
+				demo: "https://agorapay.com",
 			},
 		},
 	],
@@ -76,10 +141,10 @@ export default function Projects() {
 		<section id="projects" className="py-16 px-4 bg-muted/30">
 			<div className="container mx-auto max-w-6xl">
 				<div className="text-center mb-12">
-					<h2 className="text-3xl md:text-4xl font-bold mb-4">
+					<h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
 						{projectComponent.heading}
 					</h2>
-					<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+					<p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
 						{projectComponent.subheading}
 					</p>
 				</div>
@@ -97,22 +162,36 @@ export default function Projects() {
 									<Image
 										src={project.image.src}
 										alt={project.image.alt}
-										width={350}
-										height={200}
-										className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+										width={project.image.width || 350}
+										height={project.image.height || 200}
+										className="object-contain w-full h-full p-12 group-hover:scale-105 transition-transform duration-300"
 									/>
 								</div>
 							</CardHeader>
 							<CardContent className="p-6">
-								<CardTitle className="mb-2">
+								<CardTitle className="tracking-tight">
 									{project.title}
 								</CardTitle>
-								<CardDescription className="mb-4">
+								{project.jobPosition && (
+									<p className="text-sm font-medium text-muted-foreground mt-1">
+										{project.jobPosition}
+									</p>
+								)}
+								{project.projectDate && (
+									<p className="text-xs text-muted-foreground/80 mt-0.5">
+										{project.projectDate}
+									</p>
+								)}
+								<CardDescription className="mt-3 mb-4 leading-relaxed">
 									{project.description}
 								</CardDescription>
 								<div className="flex flex-wrap gap-2 mb-4">
 									{project.techStack.map((tech) => (
-										<Badge key={tech} variant="secondary">
+										<Badge
+											key={tech}
+											variant="secondary"
+											className="font-mono text-xs uppercase tracking-wide"
+										>
 											{tech}
 										</Badge>
 									))}
@@ -124,7 +203,10 @@ export default function Projects() {
 											variant="outline"
 											asChild
 										>
-											<Link href={project.links.github}>
+											<Link
+												href={project.links.github}
+												target="_blank"
+											>
 												<Github className="w-4 h-4 mr-2" />
 												Code
 											</Link>
