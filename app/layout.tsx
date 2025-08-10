@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import SiteFooter from "@/components/SiteFooter";
 import { Toaster as ToastToaster } from "@/components/ui/toaster";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
 	title: "Portfolio",
@@ -62,6 +63,7 @@ export default function RootLayout({
 					<SiteFooter />
 					<ToastToaster />
 					<SpeedInsights />
+					<Analytics />
 				</ThemeProvider>
 			</body>
 		</html>
