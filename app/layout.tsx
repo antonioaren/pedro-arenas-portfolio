@@ -9,7 +9,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
-	title: "Portfolio",
+	title: "Pedro Arenas | Software Developer",
 	description: "Portfolio",
 	authors: [
 		{
@@ -20,6 +20,10 @@ export const metadata: Metadata = {
 	creator: "Pedro Arenas",
 	publisher: "Pedro Arenas",
 	robots: { index: true, follow: true },
+	icons: {
+		icon: [{ url: "/logo.svg", type: "image/svg+xml" }],
+	},
+	manifest: "/site.webmanifest",
 	openGraph: {
 		title: "Portfolio",
 		description: "Portfolio",
@@ -51,6 +55,9 @@ export default function RootLayout({
 			suppressHydrationWarning
 			className={`${plusJakarta.variable} ${jetBrainsMono.variable}`}
 		>
+			<head>
+				<link rel="icon" href="/logo.svg" type="image/svg+xml" />
+			</head>
 			<body className="min-h-screen bg-background font-sans antialiased">
 				<ThemeProvider
 					attribute="class"
