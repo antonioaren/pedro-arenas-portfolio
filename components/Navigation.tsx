@@ -19,6 +19,15 @@ export default function Navigation() {
 		[]
 	);
 
+	// Initialize active section from URL hash on first mount
+	useEffect(() => {
+		const fromHash = (window.location.hash || "#about").replace("#", "");
+		if ((sections as string[]).includes(fromHash)) {
+			setActiveSection(fromHash as SectionId);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	useEffect(() => {
 		// Measure nav height
 		const measure = () => {
@@ -45,7 +54,16 @@ export default function Navigation() {
 				const el = document.getElementById(id);
 				if (el) {
 					const rect = el.getBoundingClientRect();
-					sectionOffsets[id] = Math.max(0, rect.top + window.scrollY);
+					// Align scrollspy with browser anchor scroll which respects scroll-margin-top
+					const scrollMarginTopPx = parseFloat(
+						getComputedStyle(el).scrollMarginTop || "0"
+					);
+					sectionOffsets[id] = Math.max(
+						0,
+						rect.top +
+							window.scrollY -
+							(isNaN(scrollMarginTopPx) ? 0 : scrollMarginTopPx)
+					);
 				}
 			});
 		};
@@ -80,10 +98,23 @@ export default function Navigation() {
 		onScroll();
 		window.addEventListener("scroll", onScroll, { passive: true });
 		window.addEventListener("resize", computeOffsets);
+		window.addEventListener("load", computeOffsets);
+		// Sync active link immediately on hash changes (e.g., clicking a nav link)
+		const onHashChange = () => {
+			const id = (window.location.hash || "#about").replace("#", "");
+			if ((sections as string[]).includes(id)) {
+				setActiveSection(id as SectionId);
+				computeOffsets();
+				onScroll();
+			}
+		};
+		window.addEventListener("hashchange", onHashChange);
 		window.addEventListener("orientationchange", computeOffsets);
 		return () => {
 			window.removeEventListener("scroll", onScroll as EventListener);
 			window.removeEventListener("resize", computeOffsets);
+			window.removeEventListener("load", computeOffsets);
+			window.removeEventListener("hashchange", onHashChange);
 			window.removeEventListener("orientationchange", computeOffsets);
 		};
 	}, [activeSection, navHeight, sections]);
@@ -126,6 +157,7 @@ export default function Navigation() {
 		<a
 			key={id}
 			href={`#${id}`}
+			onClick={() => setActiveSection(id)}
 			className={
 				activeSection === id
 					? `${linkBase} text-primary border-b-2 border-primary pb-1`
