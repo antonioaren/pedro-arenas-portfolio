@@ -72,10 +72,10 @@ const About: AboutInfo = {
 		},
 	],
 	image: {
-		src: "/me.png",
+		src: "/social-photo.webp",
 		alt: "Antonio Arenas",
-		width: 337,
-		height: 337,
+		width: 400,
+		height: 600,
 	},
 	imageGradientFromTo: "from-primary/20 to-primary/5",
 };
@@ -233,14 +233,14 @@ export default function HeroAbout() {
 					</div>
 					<div className="flex justify-center">
 						<div
-							className={`relative mt-8 md:mt-0 rounded-full bg-gradient-to-br ${About.imageGradientFromTo} p-1 shadow-lg w-[220px] h-[220px] md:w-[260px] md:h-[260px]`}
+							className={`relative mt-8 md:mt-0 w-full h-full rounded-full bg-gradient-to-br ${About.imageGradientFromTo} p-1 shadow-lg w-[220px] h-[220px] md:w-[260px] md:h-[260px]`}
 						>
 							<Image
 								src={About.image.src}
 								alt={About.image.alt}
 								width={About.image.width}
 								height={About.image.height}
-								className="w-full h-full rounded-full object-cover"
+								className="w-full h-full rounded-full p-2 object-cover"
 								priority
 							/>
 						</div>

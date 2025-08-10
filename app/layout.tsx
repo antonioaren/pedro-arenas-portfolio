@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navigation from "@/components/Navigation";
 import SiteFooter from "@/components/SiteFooter";
+import { Toaster as ToastToaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
 	title: "Portfolio",
@@ -58,6 +59,7 @@ export default function RootLayout({
 					<Navigation />
 					<main>{children}</main>
 					<SiteFooter />
+					<ToastToaster />
 				</ThemeProvider>
 			</body>
 		</html>

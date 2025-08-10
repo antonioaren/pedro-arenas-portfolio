@@ -1,12 +1,75 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
+
+import { useState } from "react";
+import {
+	Card,
+	CardContent,
+	CardDescription,
+	CardHeader,
+	CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
-  return (
+	const { toast } = useToast();
+	const [isSubmitting, setIsSubmitting] = useState(false);
+
+	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+		if (isSubmitting) return;
+
+		const form = event.currentTarget as HTMLFormElement;
+		const formData = new FormData(form);
+		const payload = {
+			firstName: String(formData.get("firstName") || "").trim(),
+			lastName: String(formData.get("lastName") || "").trim(),
+			email: String(formData.get("email") || "").trim(),
+			subject: String(formData.get("subject") || "").trim(),
+			message: String(formData.get("message") || "").trim(),
+		};
+
+		if (
+			!payload.firstName ||
+			!payload.lastName ||
+			!payload.email ||
+			!payload.subject ||
+			!payload.message
+		) {
+			toast({ title: "Please fill in all fields." });
+			return;
+		}
+
+		try {
+			setIsSubmitting(true);
+			const res = await fetch("/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			});
+			if (!res.ok) {
+				const data = await res.json().catch(() => ({}));
+				throw new Error(data?.error || "Failed to send message");
+			}
+			toast({
+				title: "Message sent!",
+				description: "I'll get back to you soon.",
+			});
+			form.reset();
+		} catch (error) {
+			const message =
+				error instanceof Error ? error.message : "Something went wrong";
+			toast({ title: "Could not send message", description: message });
+		} finally {
+			setIsSubmitting(false);
+		}
+	}
+
+	return (
 		<section id="contact" className="scroll-mt-24 py-16 px-4 bg-muted/30">
 			<div className="container mx-auto max-w-4xl">
 				<div className="text-center mb-12">
@@ -63,7 +126,7 @@ export default function Contact() {
 							</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<form className="space-y-4">
+							<form className="space-y-4" onSubmit={handleSubmit}>
 								<div className="grid grid-cols-2 gap-4">
 									<div>
 										<Label htmlFor="firstName">
@@ -72,6 +135,7 @@ export default function Contact() {
 										<Input
 											id="firstName"
 											placeholder="John"
+											name="firstName"
 										/>
 									</div>
 									<div>
@@ -81,6 +145,7 @@ export default function Contact() {
 										<Input
 											id="lastName"
 											placeholder="Doe"
+											name="lastName"
 										/>
 									</div>
 								</div>
@@ -90,6 +155,7 @@ export default function Contact() {
 										id="email"
 										type="email"
 										placeholder="john@example.com"
+										name="email"
 									/>
 								</div>
 								<div>
@@ -97,6 +163,7 @@ export default function Contact() {
 									<Input
 										id="subject"
 										placeholder="Project Collaboration"
+										name="subject"
 									/>
 								</div>
 								<div>
@@ -105,10 +172,17 @@ export default function Contact() {
 										id="message"
 										placeholder="Tell me about your project or opportunity..."
 										rows={4}
+										name="message"
 									/>
 								</div>
-								<Button type="submit" className="w-full">
-									Send Message
+								<Button
+									type="submit"
+									className="w-full"
+									disabled={isSubmitting}
+								>
+									{isSubmitting
+										? "Sending..."
+										: "Send Message"}
 								</Button>
 							</form>
 						</CardContent>
@@ -116,7 +190,5 @@ export default function Contact() {
 				</div>
 			</div>
 		</section>
-  );
+	);
 }
-
-
