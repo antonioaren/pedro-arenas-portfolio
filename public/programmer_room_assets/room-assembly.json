@@ -1,0 +1,65 @@
+{
+	"version": 4,
+	"texture": "textures/furniturebits_texture.png",
+	"objects": [
+		{
+			"name": "rug",
+			"file": "models/rug_rectangle_A.gltf",
+			"position": [0, 0, 0],
+			"rotationY": 0.0,
+			"scale": 1.65
+		},
+
+		{
+			"name": "desk",
+			"file": "models/table_medium_long.gltf",
+			"position": [0.95, 0, 0.28],
+			"rotationY": -0.78,
+			"scale": 0.78
+		},
+		{
+			"name": "chair",
+			"file": "models/armchair.gltf",
+			"position": [0.25, 0, 0.62],
+			"rotationY": -0.35,
+			"scale": 0.7
+		},
+		{
+			"name": "lamp",
+			"file": "models/lamp_table.gltf",
+			"position": [1.05, 0.78, 0.18],
+			"rotationY": 0.0,
+			"scale": 0.75
+		},
+
+		{
+			"name": "bed",
+			"file": "models/bed_double_A.gltf",
+			"position": [-1.05, 0, -0.85],
+			"rotationY": 0.28,
+			"scale": 0.72
+		},
+		{
+			"name": "shelf",
+			"file": "models/shelf_B_large_decorated.gltf",
+			"position": [1.25, 0, -1.35],
+			"rotationY": -1.57,
+			"scale": 0.82
+		},
+
+		{
+			"name": "books",
+			"file": "models/book_set.gltf",
+			"position": [1.25, 1.0, -1.35],
+			"rotationY": 0.0,
+			"scale": 1.0
+		},
+		{
+			"name": "picture",
+			"file": "models/pictureframe_medium.gltf",
+			"position": [0.0, 1.5, -1.6],
+			"rotationY": 0.0,
+			"scale": 1.0
+		}
+	]
+}
