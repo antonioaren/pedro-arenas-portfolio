@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAnimeInView } from "@/hooks/use-anime-in-view";
+import NextLink from "next/link";
 
 type SectionId = "about" | "projects" | "skills" | "contact";
 
@@ -38,6 +39,16 @@ export default function Navigation() {
 		window.addEventListener("resize", measure);
 		return () => window.removeEventListener("resize", measure);
 	}, []);
+
+	// Expose nav height as a CSS variable so anchored sections can offset correctly
+	useEffect(() => {
+		if (typeof document !== "undefined") {
+			document.documentElement.style.setProperty(
+				"--nav-height",
+				`${navHeight}px`
+			);
+		}
+	}, [navHeight]);
 
 	useEffect(() => {
 		// Scroll direction + scrollspy
@@ -180,19 +191,35 @@ export default function Navigation() {
 							ref={brandRef}
 							className="text-2xl font-bold tracking-tight flex items-center space-x-2"
 						>
-							<img
-								src="/logo.svg"
-								alt="Pedro Arenas"
-								width={40}
-								height={30}
-							/>
-							<span>Pedro Arenas</span>
+							<NextLink
+								href="/"
+								className="flex items-center space-x-2"
+							>
+								<img
+									src="/logo.svg"
+									alt="Pedro Arenas logo"
+									width={40}
+									height={30}
+								/>
+								<span>Pedro Arenas</span>
+							</NextLink>
 						</h1>
 						<div
 							ref={linksRef}
 							className="hidden md:flex space-x-6"
 						>
 							{renderLink("about", "About")}
+							<a
+								href="#case-studies"
+								onClick={() => setActiveSection("projects")}
+								className={
+									activeSection === "projects"
+										? `${linkBase} text-primary border-b-2 border-primary pb-1`
+										: `${linkBase} hover:text-primary text-foreground/80`
+								}
+							>
+								Case studies
+							</a>
 							{renderLink("projects", "Projects")}
 							{renderLink("skills", "Skills")}
 							{renderLink("contact", "Contact")}
@@ -213,6 +240,17 @@ export default function Navigation() {
 					<div className="container mx-auto px-4">
 						<div className="flex items-center gap-6 overflow-x-auto no-scrollbar py-3">
 							{renderLink("about", "About")}
+							<a
+								href="#case-studies"
+								onClick={() => setActiveSection("projects")}
+								className={
+									activeSection === "projects"
+										? `${linkBase} text-primary border-b-2 border-primary pb-1`
+										: `${linkBase} hover:text-primary text-foreground/80`
+								}
+							>
+								Case studies
+							</a>
 							{renderLink("projects", "Projects")}
 							{renderLink("skills", "Skills")}
 							{renderLink("contact", "Contact")}

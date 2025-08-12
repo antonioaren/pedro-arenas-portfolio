@@ -31,40 +31,40 @@ type ProjectComponent = {
 };
 
 const projectComponent: ProjectComponent = {
-	heading: "Featured Projects",
+	heading: "Projects",
 	subheading:
-		"Here are some of my recent projects that showcase my skills and experience in full-stack development.",
+		"Selected work across marketplaces, education and consumer brands.",
 	projects: [
 		{
-			title: "Udima",
+			title: "UDIMA",
 			jobPosition: "Frontend Developer",
 			projectDate: "2024-2025",
 			description:
-				"Udima is a remote university that allows users to take courses and get information about degrees, masters, phd, etc.",
+				"Remote university LMS with accessible components, SSR and analytics events for higher engagement.",
 			image: {
 				src: "/projects/udima.svg",
-				alt: "Udima",
+				alt: "UDIMA public website logo",
 				height: 500,
 				width: 500,
 			},
 			gradient: "from-white to-white",
-			techStack: ["Nuxt 3", "TypeScript", "Github Actions", "Netlify"],
+			techStack: ["Nuxt 3", "TypeScript", "GitHub Actions", "Netlify"],
 			links: {
 				demo: "https://udima.es",
 			},
 		},
 		{
-			title: "Tostarica",
+			title: "TostaRica",
 			jobPosition: "Frontend Developer",
 			projectDate: "2025",
 			description:
-				"Tostarica is a platform that allows to sell biscuits in Spain. I had the opportunity to collaborate with the team to make a new website.",
+				"High‑traffic campaigns with Nuxt 3 + CDN, responsive images and ISR for zero downtime spikes.",
 			image: {
 				src: "/projects/tostarica.webp",
-				alt: "Tostarica",
+				alt: "TostaRica brand graphic",
 			},
 			gradient: "from-yellow-500 to-yellow-600",
-			techStack: ["Nuxt 3", "GitHub Actions", "Netlify"],
+			techStack: ["Nuxt 3", "GitHub Actions", "CDN"],
 			links: {
 				demo: "https://tostarica.com",
 			},
@@ -74,13 +74,13 @@ const projectComponent: ProjectComponent = {
 			jobPosition: "Full Stack Developer",
 			projectDate: "2025",
 			description:
-				"Dollar is a platform that allows to follow your financial situation and get a better control of your money. This is a side project I decided to do by myself powered by AI.",
+				"Personal finance dashboard exploring AI‑assisted budgeting and reporting.",
 			image: {
 				src: "/projects/dollar.svg",
 				alt: "Dollar",
 			},
 			gradient: "from-purple-500 to-blue-600",
-			techStack: ["Next.js", "TypeScript", "Github Actions", "Vercel"],
+			techStack: ["Next.js", "TypeScript", "GitHub Actions", "Vercel"],
 			links: {
 				demo: "https://dollar.antonioaren.es",
 				github: "https://github.com/antonioaren/dollar",
@@ -91,10 +91,10 @@ const projectComponent: ProjectComponent = {
 			jobPosition: "Full Stack Developer",
 			projectDate: "2022-2023",
 			description:
-				"Buscorepuestos is an e-commerce platform that scrapes the best products from various sources and sells them on its own website. It finds potential clients, provides detailed information about the products, and handles all aspects of the selling process.",
+				"Marketplace aggregator with targeted indexes, query caching and CI/CD for faster search and releases.",
 			image: {
 				src: "/projects/buscorepuestos.svg",
-				alt: "Buscorepuestos",
+				alt: "Buscorepuestos logo",
 			},
 			gradient: "from-blue-600 to-white",
 			techStack: [
@@ -102,7 +102,7 @@ const projectComponent: ProjectComponent = {
 				"Next.js",
 				"TypeScript",
 				"Heroku",
-				"Github Actions",
+				"GitHub Actions",
 				"Vercel",
 				"MongoDB",
 			],
@@ -112,17 +112,17 @@ const projectComponent: ProjectComponent = {
 			},
 		},
 		{
-			title: "Credit Agricole Mon Commerce",
+			title: "Crédit Agricole — Mon Commerce",
 			jobPosition: "Frontend Developer",
 			projectDate: "2022-2023",
 			description:
-				"Credit Agricoles is a bank that allows to manage your finances and get a better control of your money. I had the opportunity to collaborate in his product call Mon Commerce, Mon commerce helps business to contract online services for payments, invoices, etc.",
+				"Merchant tooling portal; collaborated on onboarding flows and payments configuration UI.",
 			image: {
 				src: "/projects/camc.svg",
-				alt: "Credit Agricole Mon Commerce",
+				alt: "Crédit Agricole Mon Commerce logo",
 			},
 			gradient: "from-white to-white",
-			techStack: ["Next.js", "TypeScript", "Github Actions", "Vercel"],
+			techStack: ["Next.js", "TypeScript", "GitHub Actions", "Vercel"],
 			links: {
 				demo: "https://www.ca-moncommerce.com/",
 			},
@@ -132,13 +132,13 @@ const projectComponent: ProjectComponent = {
 			jobPosition: "Frontend Developer",
 			projectDate: "2022-2023",
 			description:
-				"Agorapay is website for developers that help you to get started including paid pasarel to test payments.",
+				"Developer portal with payment sandbox and docs improvements.",
 			image: {
 				src: "/projects/agorapay.svg",
 				alt: "Agorapay",
 			},
 			gradient: "from-white to-white",
-			techStack: ["Next.js", "TypeScript", "Github Actions", "Vercel"],
+			techStack: ["Next.js", "TypeScript", "GitHub Actions", "Vercel"],
 			links: {
 				demo: "https://agorapay.com",
 			},
@@ -326,7 +326,10 @@ function TiltSpotlightCard({ project }: { project: Project }) {
 						)}
 						{project.links.demo && (
 							<Button size="sm" asChild>
-								<Link href={project.links.demo}>
+								<Link
+									href={project.links.demo}
+									aria-label={`Open ${project.title} live site`}
+								>
 									<ExternalLink className="w-4 h-4 mr-2" />
 									Live Demo
 								</Link>

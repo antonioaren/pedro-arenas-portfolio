@@ -74,11 +74,11 @@ export default function Contact() {
 			<div className="container mx-auto max-w-4xl">
 				<div className="text-center mb-12">
 					<h2 className="text-3xl md:text-4xl font-bold mb-4">
-						Get In Touch
+						Get in touch
 					</h2>
 					<p className="text-lg text-muted-foreground">
-						I'm always interested in new opportunities and
-						collaborations. Let's discuss your project!
+						Currently available for Senior roles (Remote EU). Let's
+						discuss your project or opening.
 					</p>
 				</div>
 
@@ -86,7 +86,7 @@ export default function Contact() {
 					{/* Contact Info */}
 					<div>
 						<h3 className="text-2xl font-semibold mb-6">
-							Let's Connect
+							Let's connect
 						</h3>
 						<div className="space-y-4">
 							<div className="flex items-center space-x-3">
@@ -108,10 +108,9 @@ export default function Contact() {
 								Currently Available For
 							</h4>
 							<ul className="space-y-2 text-muted-foreground">
-								<li>• Freelance opportunities</li>
-								<li>• Tech Lead positions</li>
-								<li>• Senior engineering roles</li>
-								<li>• Architecture consulting</li>
+								<li>• Senior Frontend/Full‑Stack roles</li>
+								<li>• Tech Lead and architecture consulting</li>
+								<li>• Performance, DX and CI/CD engagements</li>
 							</ul>
 						</div>
 					</div>

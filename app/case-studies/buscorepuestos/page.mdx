@@ -1,0 +1,60 @@
+import CaseStudyLayout from "@/components/case-studies/CaseStudy";
+
+export const metadata = {
+  title: "Case Study — Buscorepuestos (Marketplace)",
+  description: "+40% search efficiency; 1h→10m release time",
+};
+
+<CaseStudyLayout
+  title="Buscorepuestos (2022–24) — Marketplace aggregator"
+  sections={[
+    { id: "problem", title: "Problem" },
+    { id: "decisions", title: "Decisions" },
+    { id: "architecture", title: "Architecture" },
+    { id: "results", title: "Results" },
+    { id: "role", title: "My role" },
+    { id: "links", title: "Links" },
+    { id: "evidence", title: "Evidence checklist" },
+  ]}
+>
+
+### <span id="problem">Problem</span>
+
+Speed up search and shorten releases.
+
+### <span id="decisions">Decisions</span>
+
+- Query caching and targeted indexes
+- Automated CI/CD with preview builds and rollbacks
+- SSR for SEO and stable traffic peaks
+
+### <span id="architecture">Architecture</span>
+
+- Next.js + legacy Angular modules
+- MongoDB; scraping queues; Vercel/Heroku; GitHub Actions
+
+### <span id="results">Results (numbers)</span>
+
+- +40% search efficiency
+- 1h→10m deploy time
+- Stable peaks
+
+### <span id="role">My role</span>
+
+Engineering manager (architecture, team of 5, QA, releases).
+
+### <span id="links">Links</span>
+
+- [buscorepuestos.com](https://buscorepuestos.com)
+
+### <span id="evidence">Evidence checklist</span>
+
+- Latency logs
+- CI/CD panel
+- Build time diffs
+- Closed issues
+- SERP screenshots
+
+</CaseStudyLayout>
+
+

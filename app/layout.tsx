@@ -9,12 +9,15 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
-	title: "Pedro Arenas | Software Developer",
-	description: "Portfolio",
+	title: "Pedro Arenas | Senior Frontend Engineer",
+	description:
+		"Senior Frontend/Full‑Stack Engineer. −45% page‑load, −30% AWS costs, 500k+ monthly visitors. Available Remote (EU).",
+	metadataBase: new URL("https://pedroarenas.dev"),
+	alternates: { canonical: "/" },
 	authors: [
 		{
 			name: "Pedro Arenas",
-			url: "https://www.pedroarenas.com",
+			url: "https://pedroarenas.dev",
 		},
 	],
 	creator: "Pedro Arenas",
@@ -25,8 +28,29 @@ export const metadata: Metadata = {
 	},
 	manifest: "/site.webmanifest",
 	openGraph: {
-		title: "Portfolio",
-		description: "Portfolio",
+		title: "Pedro Arenas — Senior Frontend Engineer",
+		description:
+			"I build fast, scalable web apps that move metrics: −45% page‑load, −30% AWS costs, 500k+ monthly visitors.",
+		url: "https://pedroarenas.dev",
+		siteName: "Pedro Arenas Portfolio",
+		images: [
+			{
+				url: "/social-photo.webp",
+				width: 1200,
+				height: 630,
+				alt: "Pedro Arenas",
+			},
+		],
+		type: "website",
+		locale: "en_US",
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Pedro Arenas — Senior Frontend Engineer",
+		description:
+			"I build fast, scalable web apps that move metrics: −45% page‑load, −30% AWS costs, 500k+ monthly visitors.",
+		images: ["/social-photo.webp"],
+		creator: "@pedroarenas",
 	},
 };
 

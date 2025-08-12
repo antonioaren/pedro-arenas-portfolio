@@ -1,5 +1,7 @@
+import createMDX from '@next/mdx'
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const baseConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -9,6 +11,15 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
 }
 
-export default nextConfig
+const withMDX = createMDX({
+  options: {
+    // Disable automatic MDXProvider injection to avoid using React context in RSC
+    // MDX pages can still use client components explicitly when needed.
+    providerImportSource: undefined,
+  },
+})
+
+export default withMDX(baseConfig)

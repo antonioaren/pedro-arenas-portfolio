@@ -1,0 +1,58 @@
+import CaseStudyLayout from "@/components/case-studies/CaseStudy";
+
+export const metadata = {
+  title: "Case Study — UDIMA (LMS)",
+  description: "+35% LMS engagement; SSR + accessible components",
+};
+
+<CaseStudyLayout
+  title="UDIMA (2024–25) — LMS"
+  sections={[
+    { id: "problem", title: "Problem" },
+    { id: "decisions", title: "Decisions" },
+    { id: "architecture", title: "Architecture" },
+    { id: "results", title: "Results" },
+    { id: "role", title: "My role" },
+    { id: "links", title: "Links" },
+    { id: "evidence", title: "Evidence checklist" },
+  ]}
+>
+
+### <span id="problem">Problem</span>
+
+Increase student engagement and accessibility.
+
+### <span id="decisions">Decisions</span>
+
+- SSR with Nuxt 3
+- Accessible components; roles, focus management, contrast
+- Lazy data and analytics events for meaningful signals
+
+### <span id="architecture">Architecture</span>
+
+- Nuxt 3 + TypeScript, server rendering
+- a11y roles/focus/contrast baked into components
+
+### <span id="results">Results (numbers)</span>
+
+- +35% engagement (time on task/completions) // ⚠ to be confirmed
+- +20% SEO/a11y scores // ⚠ to be confirmed
+
+### <span id="role">My role</span>
+
+Frontend developer (components, measurement, rollout).
+
+### <span id="links">Links</span>
+
+- [udima.es](https://www.udima.es) (public section)
+
+### <span id="evidence">Evidence checklist</span>
+
+- Analytics screenshots
+- a11y audits
+- Metric diffs
+- PRDs
+
+</CaseStudyLayout>
+
+

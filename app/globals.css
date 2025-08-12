@@ -93,6 +93,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Ensure anchored headings inside MDX prose account for fixed navbar */
+.prose [id] {
+  scroll-margin-top: var(--anchor-offset, calc(var(--nav-height, 64px) + 16px));
+}
+
 /* Attach fonts via CSS variables from layout */
 :root {
   font-family: var(--font-sans);

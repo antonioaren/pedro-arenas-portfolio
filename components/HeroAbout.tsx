@@ -17,14 +17,15 @@ const socialIconByType: Record<SocialType, typeof Github> = {
 };
 
 type AboutInfo = {
-	titleMain: string;
-	titleAccent: string;
-	description: string;
+	heading: string;
+	subheading: string;
 	ctas: Array<{
 		label: string;
 		href: string;
-		variant?: "default" | "outline";
+		variant?: "default" | "outline" | "link";
 		newTab?: boolean;
+		ariaLabel?: string;
+		download?: boolean;
 	}>;
 	socials: Array<{
 		type: SocialType;
@@ -41,17 +42,29 @@ type AboutInfo = {
 };
 
 const About: AboutInfo = {
-	titleMain: "Hi! 👋",
-	titleAccent: "I'm Software Developer",
-	description:
-		"I have been working as a Software Developer for 8+ years. I build scalable, cleanly‑architected web apps with JavaScript/TypeScript and Python/Django. I care about DX, performance, accessibility, and shipping business impact—turning complex problems into simple, maintainable systems.",
+	// Hero A (default): Role + value + metrics for Senior Frontend/Full‑Stack roles
+	heading: "Senior Frontend Engineer (React/Next, Vue/Nuxt)",
+	subheading:
+		"I build fast, scalable web apps that move business metrics: −45% page‑load, −30% AWS costs, 500k+ monthly visitors without downtime. Available remote (EU).",
 	ctas: [
-		{ label: "Get In Touch", href: "#contact" },
 		{
-			label: "Download Resume",
-			href: "/resume.pdf",
+			label: "Hire me",
+			href: "mailto:antonioaren2@gmail.com?subject=Senior%20Frontend%20Role",
+			ariaLabel: "Hire Pedro Arenas for a Senior Frontend role",
+		},
+		{
+			label: "Download 1-pager",
+			href: "/pedro-arenas-1pager.pdf",
 			variant: "outline",
-			newTab: true,
+			newTab: false,
+			ariaLabel: "Download Pedro Arenas 1-pager (PDF)",
+			download: true,
+		},
+		{
+			label: "View case studies",
+			href: "/#case-studies",
+			variant: "link",
+			ariaLabel: "View case studies by Pedro Arenas",
 		},
 	],
 	socials: [
@@ -73,7 +86,7 @@ const About: AboutInfo = {
 	],
 	image: {
 		src: "/social-photo.webp",
-		alt: "Antonio Arenas",
+		alt: "Pedro Arenas portrait",
 		width: 400,
 		height: 600,
 	},
@@ -171,20 +184,17 @@ export default function HeroAbout() {
 			<div className="container mx-auto max-w-6xl relative">
 				<div className="grid grid-cols-1 md:grid-cols-2 items-center gap-10 lg:gap-16">
 					<div className="flex flex-col items-center md:items-start text-center md:text-left gap-6">
-						<h2
+						<h1
 							ref={headingRef}
 							className="text-4xl md:text-6xl font-bold tracking-tight"
 						>
-							{About.titleMain}
-							<span className="text-primary block">
-								{About.titleAccent}
-							</span>
-						</h2>
+							{About.heading}
+						</h1>
 						<p
 							ref={descriptionRef}
 							className="text-lg text-muted-foreground leading-relaxed"
 						>
-							{About.description}
+							{About.subheading}
 						</p>
 						<div
 							ref={ctasRef}
@@ -206,6 +216,10 @@ export default function HeroAbout() {
 												? "noreferrer"
 												: undefined
 										}
+										aria-label={cta.ariaLabel}
+										{...(cta.download
+											? { download: "" }
+											: {})}
 									>
 										{cta.label}
 									</a>

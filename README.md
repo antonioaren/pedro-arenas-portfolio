@@ -171,7 +171,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👨‍💻 Author
 
-**Antonio Arenas**
+**Pedro Arenas**
 - Website: [pedroarenas.dev](https://pedroarenas.dev)
 - GitHub: [@antonioaren](https://github.com/antonioaren)
 - LinkedIn: [antonioaren](https://linkedin.com/in/antonioaren)

@@ -1,0 +1,60 @@
+import CaseStudyLayout from "@/components/case-studies/CaseStudy";
+
+export const metadata = {
+  title: "Case Study — TostaRica (Nuxt 3)",
+  description: "500k+ monthly visitors, 0 downtime; Nuxt 3 + ISR + CDN",
+};
+
+<CaseStudyLayout
+  title="TostaRica (2025) — Nuxt 3"
+  sections={[
+    { id: "problem", title: "Problem" },
+    { id: "decisions", title: "Decisions" },
+    { id: "architecture", title: "Architecture" },
+    { id: "results", title: "Results" },
+    { id: "role", title: "My role" },
+    { id: "links", title: "Links" },
+    { id: "evidence", title: "Evidence checklist" },
+  ]}
+>
+
+### <span id="problem">Problem</span>
+
+Campaign traffic spikes; keep TTFB low and scale without downtime.
+
+### <span id="decisions">Decisions</span>
+
+- Nuxt 3 + ISR for critical routes
+- Responsive images and CDN edge caching
+- Pre-render high-traffic landing pages
+
+### <span id="architecture">Architecture</span>
+
+- Nuxt 3 + TypeScript
+- Edge caching, route-level code splitting, CI/CD
+
+### <span id="results">Results (numbers)</span>
+
+- 500k+ monthly visitors, 0 downtime
+- LCP ~1.8–2.4s // ⚠ to be confirmed
+- CLS &lt; 0.1 // ⚠ to be confirmed
+
+### <span id="role">My role</span>
+
+Frontend lead (performance budget, audits, pipeline).
+
+### <span id="links">Links</span>
+
+- [tostarica.com](https://tostarica.com)
+
+### <span id="evidence">Evidence checklist</span>
+
+- Lighthouse reports
+- GA traffic graph
+- Uptime logs
+- Key PRs
+- Before/after video
+
+</CaseStudyLayout>
+
+
