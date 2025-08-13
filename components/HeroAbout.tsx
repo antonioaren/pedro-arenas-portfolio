@@ -54,11 +54,11 @@ const About: AboutInfo = {
 			ariaLabel: "Hire Pedro Arenas for a Senior Frontend role",
 		},
 		{
-			label: "Download 1-pager",
-			href: "/pedro-arenas-1pager.pdf",
+			label: "Download Resume",
+			href: "/api/download/resume",
 			variant: "outline",
 			newTab: false,
-			ariaLabel: "Download Pedro Arenas 1-pager (PDF)",
+			ariaLabel: "Download Pedro Arenas Resume (PDF)",
 			download: true,
 		},
 		{
@@ -229,7 +229,11 @@ export default function HeroAbout() {
 										}
 										aria-label={cta.ariaLabel}
 										{...(cta.download
-											? { download: "" }
+											? {
+													download:
+														"Pedro-Arenas-Resume.pdf",
+													type: "application/pdf",
+											  }
 											: {})}
 									>
 										{cta.label}
