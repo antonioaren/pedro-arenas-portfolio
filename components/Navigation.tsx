@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useAnimeInView } from "@/hooks/use-anime-in-view";
 import NextLink from "next/link";
 
-type SectionId = "about" | "projects" | "skills" | "contact";
+type SectionId = "about" | "case-studies" | "projects" | "skills" | "contact";
 
 export default function Navigation() {
 	const navRef = useRef<HTMLElement | null>(null);
@@ -16,7 +16,7 @@ export default function Navigation() {
 	const linksRef = useRef<HTMLDivElement | null>(null);
 
 	const sections: SectionId[] = useMemo(
-		() => ["about", "projects", "skills", "contact"],
+		() => ["about", "case-studies", "projects", "skills", "contact"],
 		[]
 	);
 
@@ -55,6 +55,7 @@ export default function Navigation() {
 		let ticking = false;
 		let sectionOffsets: Record<SectionId, number> = {
 			about: 0,
+			"case-studies": 0,
 			projects: 0,
 			skills: 0,
 			contact: 0,
@@ -209,17 +210,7 @@ export default function Navigation() {
 							className="hidden md:flex space-x-6"
 						>
 							{renderLink("about", "About")}
-							<a
-								href="#case-studies"
-								onClick={() => setActiveSection("projects")}
-								className={
-									activeSection === "projects"
-										? `${linkBase} text-primary border-b-2 border-primary pb-1`
-										: `${linkBase} hover:text-primary text-foreground/80`
-								}
-							>
-								Case studies
-							</a>
+							{renderLink("case-studies", "Case Studies")}
 							{renderLink("projects", "Projects")}
 							{renderLink("skills", "Skills")}
 							{renderLink("contact", "Contact")}
@@ -240,17 +231,7 @@ export default function Navigation() {
 					<div className="container mx-auto px-4">
 						<div className="flex items-center gap-6 overflow-x-auto no-scrollbar py-3">
 							{renderLink("about", "About")}
-							<a
-								href="#case-studies"
-								onClick={() => setActiveSection("projects")}
-								className={
-									activeSection === "projects"
-										? `${linkBase} text-primary border-b-2 border-primary pb-1`
-										: `${linkBase} hover:text-primary text-foreground/80`
-								}
-							>
-								Case studies
-							</a>
+							{renderLink("case-studies", "Case Studies")}
 							{renderLink("projects", "Projects")}
 							{renderLink("skills", "Skills")}
 							{renderLink("contact", "Contact")}

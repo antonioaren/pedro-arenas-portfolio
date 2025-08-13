@@ -7,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Aurora from "@/components/reactbits/backgrounds/Aurora/Aurora";
+import TextType from "./reactbits/text-animations/TextType/TextType";
 
 type SocialType = "github" | "linkedin" | "email";
 
@@ -186,9 +187,19 @@ export default function HeroAbout() {
 					<div className="flex flex-col items-center md:items-start text-center md:text-left gap-6">
 						<h1
 							ref={headingRef}
-							className="text-4xl md:text-6xl font-bold tracking-tight"
+							className="text-6xl md:text-6xl min-h-[300px] lg:min-h-[280px] md:min-h-[256px] font-bold tracking-tight"
 						>
-							{About.heading}
+							<TextType
+								as="span"
+								className="text-primary block"
+								text={[About.heading]}
+								typingSpeed={100}
+								loop={true}
+								showCursor={true}
+								hideCursorWhileTyping={false}
+								cursorCharacter="|"
+								initialDelay={0}
+							/>
 						</h1>
 						<p
 							ref={descriptionRef}
