@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import SmartImage from "@/components/SmartImage";
 
 interface Project {
 	id: string;
@@ -379,10 +380,11 @@ function ProjectCard({
 						index % 2 === 1 ? "lg:col-start-2" : ""
 					}`}
 				>
-					<img
+					<SmartImage
 						src={project.image || "/placeholder.svg"}
 						alt={project.name}
 						className="w-full h-full object-contain p-12 transition-transform duration-700 group-hover:scale-110"
+						containerClassName="w-full h-full"
 					/>
 					<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
