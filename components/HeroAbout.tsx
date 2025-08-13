@@ -55,7 +55,7 @@ const About: AboutInfo = {
 		},
 		{
 			label: "Download Resume",
-			href: "/api/download/resume",
+			href: "/resume.pdf",
 			variant: "outline",
 			newTab: false,
 			ariaLabel: "Download Pedro Arenas Resume (PDF)",
