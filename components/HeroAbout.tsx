@@ -8,6 +8,7 @@ import Image from "next/image";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Aurora from "@/components/reactbits/backgrounds/Aurora/Aurora";
 import TextType from "./reactbits/text-animations/TextType/TextType";
+import LightRays from "@/components/reactbits/backgrounds/LightRays/LightRays";
 
 type SocialType = "github" | "linkedin" | "email";
 
@@ -175,11 +176,18 @@ export default function HeroAbout() {
 			className="relative overflow-hidden scroll-mt-24 px-4 py-[8rem] min-h-[70vh]"
 		>
 			<div className="absolute inset-0 -z-10 pointer-events-none">
-				<Aurora
-					colorStops={["#0ea5e9", "#8b5cf6", "#10b981"]}
-					amplitude={3}
-					blend={1}
-					speed={1.0}
+				<LightRays
+					raysOrigin="right"
+					raysColor="#00ffff"
+					raysSpeed={3}
+					lightSpread={1}
+					rayLength={3}
+					fadeDistance={1.2}
+					saturation={1.5}
+					followMouse={true}
+					mouseInfluence={0.1}
+					noiseAmount={0}
+					distortion={0.5}
 				/>
 			</div>
 			<div className="container mx-auto max-w-6xl relative">

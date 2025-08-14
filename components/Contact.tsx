@@ -14,6 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import SplitText from "@/components/reactbits/text-animations/SplitText/SplitText";
 
 export default function Contact() {
 	const { toast } = useToast();
@@ -74,7 +75,15 @@ export default function Contact() {
 			<div className="container mx-auto max-w-4xl">
 				<div className="text-center mb-12">
 					<h2 className="text-3xl md:text-4xl font-bold mb-4">
-						Get in touch
+						<SplitText
+							as="span"
+							className="text-3xl md:text-4xl font-bold mb-4"
+							text={"Get in touch"}
+							splitType="chars"
+							from={{ opacity: 0, y: 40 }}
+							to={{ opacity: 1, y: 0 }}
+							threshold={0.2}
+						/>
 					</h2>
 					<p className="text-lg text-muted-foreground">
 						Currently available for Senior roles (Remote EU). Let's

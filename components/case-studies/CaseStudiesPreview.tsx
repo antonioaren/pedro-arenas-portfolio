@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef } from "react";
 import { useAnimeInView } from "@/hooks/use-anime-in-view";
+import SplitText from "@/components/reactbits/text-animations/SplitText/SplitText";
 
 const items = [
 	{
@@ -35,64 +36,115 @@ const items = [
 ];
 
 export default function CaseStudiesPreview() {
-  const sectionRef = useRef<HTMLDivElement | null>(null);
-  const listRef = useRef<HTMLDivElement | null>(null);
+	const sectionRef = useRef<HTMLDivElement | null>(null);
+	const listRef = useRef<HTMLDivElement | null>(null);
 
-  useAnimeInView(
-    sectionRef,
-    (anime, el) => {
-      const heading = el.querySelector("h2");
-      const sub = el.querySelector("p");
-      const { createTimeline } = anime;
-      (el as HTMLElement).style.opacity = "1";
-      createTimeline({ autoplay: true })
-        .add({ targets: heading, translateY: [16, 0], opacity: [0, 1], duration: 600, easing: "easeOutExpo" })
-        .add({ targets: sub, translateY: [12, 0], opacity: [0, 1], duration: 500, easing: "easeOutExpo" }, "-=250");
-    },
-    { threshold: 0.2 }
-  );
+	useAnimeInView(
+		sectionRef,
+		(anime, el) => {
+			const heading = el.querySelector("h2");
+			const sub = el.querySelector("p");
+			const { createTimeline } = anime;
+			(el as HTMLElement).style.opacity = "1";
+			createTimeline({ autoplay: true })
+				.add({
+					targets: heading,
+					translateY: [16, 0],
+					opacity: [0, 1],
+					duration: 600,
+					easing: "easeOutExpo",
+				})
+				.add(
+					{
+						targets: sub,
+						translateY: [12, 0],
+						opacity: [0, 1],
+						duration: 500,
+						easing: "easeOutExpo",
+					},
+					"-=250"
+				);
+		},
+		{ threshold: 0.2 }
+	);
 
-  useAnimeInView(
-    listRef,
-    (anime, el) => {
-      const cards = el.querySelectorAll("[data-cs]");
-      const { animate, stagger } = anime;
-      (el as HTMLElement).style.opacity = "1";
-      animate(cards, { translateY: [20, 0], opacity: [0, 1], duration: 550, easing: "easeOutExpo", delay: stagger(80) });
-    },
-    { threshold: 0.2 }
-  );
+	useAnimeInView(
+		listRef,
+		(anime, el) => {
+			const cards = el.querySelectorAll("[data-cs]");
+			const { animate, stagger } = anime;
+			(el as HTMLElement).style.opacity = "1";
+			animate(cards, {
+				translateY: [20, 0],
+				opacity: [0, 1],
+				duration: 550,
+				easing: "easeOutExpo",
+				delay: stagger(80),
+			});
+		},
+		{ threshold: 0.2 }
+	);
 
-  return (
-    <section id="case-studies" className="scroll-mt-24 py-16 px-4">
-      <div ref={sectionRef} className="container mx-auto max-w-6xl">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Case studies</h2>
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Problem → Decisions → Architecture → Results → My role → Links → Evidence checklist
-          </p>
-        </div>
+	return (
+		<section id="case-studies" className="scroll-mt-24 py-16 px-4">
+			<div ref={sectionRef} className="container mx-auto max-w-6xl">
+				<div className="text-center mb-12 flex flex-col items-center">
+					<h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+						<SplitText
+							as="span"
+							className="text-3xl md:text-4xl font-bold tracking-tight mb-4"
+							text={"Case studies"}
+							splitType="chars"
+							from={{ opacity: 0, y: 40 }}
+							to={{ opacity: 1, y: 0 }}
+							threshold={0.2}
+						/>
+					</h2>
+					<SplitText
+						as="p"
+						className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto"
+						text={
+							"Problem → Decisions → Architecture → Results → My role → Links → Evidence"
+						}
+						splitType="words"
+						from={{ opacity: 0, y: 40 }}
+						to={{ opacity: 1, y: 0 }}
+						threshold={0.2}
+					/>
+				</div>
 
-        <div ref={listRef} className="grid md:grid-cols-3 gap-6 opacity-0">
-          {items.map((item) => (
-            <div key={item.slug} data-cs className="rounded-lg border p-6 bg-background/50">
-              <h3 className="text-lg font-semibold mb-3">{item.title}</h3>
-              <ul className="list-disc pl-5 text-muted-foreground space-y-1">
-                {item.bullets.map((b, i) => (
-                  <li key={i}>{b}</li>
-                ))}
-              </ul>
-              <div className="mt-4">
-                <Link href={`/case-studies/${item.slug}`} className="text-primary hover:underline">
-                  Read more
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+				<div
+					ref={listRef}
+					className="grid md:grid-cols-3 gap-6 opacity-0"
+				>
+					{items.map((item) => (
+						<div
+							key={item.slug}
+							data-cs
+							className="rounded-lg border p-6 bg-background/50"
+						>
+							<h3 className="text-lg font-semibold mb-3">
+								{item.title}
+							</h3>
+							<ul className="list-disc pl-5 text-muted-foreground space-y-1">
+								{item.bullets.map((b, i) => (
+									<li key={i}>{b}</li>
+								))}
+							</ul>
+							<div className="mt-4">
+								<Link
+									href={`/case-studies/${item.slug}`}
+									className="text-primary hover:underline"
+								>
+									Read more
+								</Link>
+							</div>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+	);
 }
 
 

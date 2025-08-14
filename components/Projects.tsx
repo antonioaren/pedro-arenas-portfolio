@@ -3,7 +3,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import TextType from "@/components/reactbits/text-animations/TextType/TextType";
+import SplitText from "@/components/reactbits/text-animations/SplitText/SplitText";
 
 import {
 	Calendar,
@@ -18,6 +18,7 @@ import {
 import { useState } from "react";
 import Link from "next/link";
 import SmartImage from "@/components/SmartImage";
+import Aurora from "@/components/reactbits/backgrounds/Aurora/Aurora";
 
 interface Project {
 	id: string;
@@ -45,7 +46,7 @@ type ProjectComponent = {
 };
 
 const projectComponent: ProjectComponent = {
-	heading: "My Development Journey",
+	heading: "Development Journey",
 	subheading:
 		"From learning to leading: How real-world projects shaped my expertise",
 	narrative:
@@ -279,32 +280,33 @@ export default function Projects() {
 	return (
 		<section
 			id="projects"
-			className="relative scroll-mt-24 py-20 px-4 max-w-7xl mx-auto overflow-hidden"
+			className="relative scroll-mt-24 py-20 overflow-hidden"
 		>
 			{/* Epic Background Effects */}
-			<div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
+			<div className="absolute inset-0 pointer-events-none">
+				<Aurora
+					colorStops={["#0ea5e9", "#8b5cf6", "#10b981"]}
+					amplitude={3}
+					blend={1}
+					speed={1.0}
+				/>
+			</div>
 			<div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
 			<div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-3xl animate-pulse delay-1000" />
 
-			<div className="relative z-10">
+			<div className="relative z-10 max-w-7xl mx-auto px-4">
 				{/* Epic Header */}
 				<div className="text-center mb-20">
-					<div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
-						<Zap className="w-4 h-4 text-primary" />
-						<span className="text-sm font-medium text-primary">
-							Epic Project Showcase
-						</span>
-					</div>
-
-					<h2 className="text-5xl lg:text-7xl font-black mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent leading-tight">
-						{projectComponent.heading.split(" ")[0]}
-						<br />
-						<span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
-							{projectComponent.heading
-								.split(" ")
-								.slice(1)
-								.join(" ")}
-						</span>
+					<h2 className="text-5xl lg:text-7xl font-black mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text leading-tight">
+						<SplitText
+							as="span"
+							className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text inline-block"
+							text={projectComponent.heading}
+							splitType="chars"
+							from={{ opacity: 0, y: 40 }}
+							to={{ opacity: 1, y: 0 }}
+							threshold={0.2}
+						/>
 					</h2>
 
 					<p className="text-xl lg:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed mb-8">
