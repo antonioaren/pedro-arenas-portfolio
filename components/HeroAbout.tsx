@@ -228,13 +228,6 @@ export default function HeroAbout() {
 												: undefined
 										}
 										aria-label={cta.ariaLabel}
-										{...(cta.download
-											? {
-													download:
-														"Pedro-Arenas-Resume.pdf",
-													type: "application/pdf",
-											  }
-											: {})}
 									>
 										{cta.label}
 									</a>
