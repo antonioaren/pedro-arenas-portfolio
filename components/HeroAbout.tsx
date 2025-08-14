@@ -192,8 +192,8 @@ export default function HeroAbout() {
 							<TextType
 								as="span"
 								className="text-primary block"
-								text={[About.heading]}
-								typingSpeed={100}
+								text={[About.heading, About.heading]}
+								typingSpeed={50}
 								loop={true}
 								showCursor={true}
 								hideCursorWhileTyping={false}

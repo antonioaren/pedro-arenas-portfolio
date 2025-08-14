@@ -527,6 +527,7 @@ function ProjectCard({
 							{project.links.demo && (
 								<Button size="sm" className="group/btn" asChild>
 									<Link
+										className="relative z-4"
 										href={project.links.demo}
 										target="_blank"
 									>

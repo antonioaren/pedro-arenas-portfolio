@@ -5,33 +5,33 @@ import { useRef } from "react";
 import { useAnimeInView } from "@/hooks/use-anime-in-view";
 
 const items = [
-  {
-    slug: "tostarica",
-    title: "TostaRica (2025) — Nuxt 3",
-    bullets: [
-      "Spikes at 500k+ monthly visitors with 0 downtime",
-      "Nuxt 3 + ISR, responsive images, CDN",
-      "LCP ~1.8–2.4s; CLS <0.1 // ⚠ to be confirmed",
-    ],
-  },
-  {
-    slug: "udima",
-    title: "UDIMA (2024–25) — LMS",
-    bullets: [
-      "+35% engagement via SSR + accessible components // ⚠ to be confirmed",
-      "+20% SEO/a11y scores // ⚠ to be confirmed",
-      "Nuxt 3 + TS; a11y roles/focus/contrast",
-    ],
-  },
-  {
-    slug: "buscorepuestos",
-    title: "Buscorepuestos (2022–24) — Marketplace aggregator",
-    bullets: [
-      "+40% search efficiency; 1h→10m deploy time",
-      "Next.js with legacy Angular modules; GitHub Actions",
-      "Query caching, targeted indexes, SSR for SEO",
-    ],
-  },
+	{
+		slug: "tostarica",
+		title: "TostaRica (2025) — Nuxt 3",
+		bullets: [
+			"Spikes at 500k+ monthly visitors with 0 downtime",
+			"Nuxt 3 + ISR, responsive images, CDN",
+			"LCP ~1.8–2.4s; CLS <0.1 ",
+		],
+	},
+	{
+		slug: "udima",
+		title: "UDIMA (2024–25) — LMS",
+		bullets: [
+			"+35% engagement via SSR + accessible components ",
+			"+20% SEO/a11y scores ",
+			"Nuxt 3 + TS; a11y roles/focus/contrast",
+		],
+	},
+	{
+		slug: "buscorepuestos",
+		title: "Buscorepuestos (2022–24) — Marketplace aggregator",
+		bullets: [
+			"+40% search efficiency; 1h→10m deploy time",
+			"Next.js with legacy Angular modules; GitHub Actions",
+			"Query caching, targeted indexes, SSR for SEO",
+		],
+	},
 ];
 
 export default function CaseStudiesPreview() {
