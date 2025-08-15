@@ -212,11 +212,27 @@ print_status "Preparing release $NEW_TAG (from ${LAST_TAG:-initial})"
 RELEASE_NOTES_FILE=$(mktemp)
 generate_release_notes "$RANGE" "$NEW_TAG" "$RELEASE_NOTES_FILE"
 
-# Create annotated tag with release notes
-git tag -a "$NEW_TAG" -F "$RELEASE_NOTES_FILE"
+# Create tag (signed if configured)
+# Priority:
+# 1) SIGN_TAGS=1 env var → sign
+# 2) git config tag.gpgSign=true → sign
+# 3) default → annotated (no signing)
+SHOULD_SIGN=${SIGN_TAGS:-}
+if [ -z "$SHOULD_SIGN" ]; then
+	if git config --get tag.gpgSign | grep -qi "true"; then
+		SHOULD_SIGN=1
+	else
+		SHOULD_SIGN=0
+	fi
+fi
 
-# Sign the tag
-git tag -s "$NEW_TAG" -F "$RELEASE_NOTES_FILE"
+if [ "$SHOULD_SIGN" = "1" ]; then
+	print_status "Creating signed tag $NEW_TAG..."
+	git tag -s "$NEW_TAG" -F "$RELEASE_NOTES_FILE"
+else
+	print_status "Creating annotated tag $NEW_TAG..."
+	git tag -a "$NEW_TAG" -F "$RELEASE_NOTES_FILE"
+fi
 
 # Push tag
 print_status "Pushing tag $NEW_TAG to origin..."
