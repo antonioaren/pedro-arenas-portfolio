@@ -297,12 +297,12 @@ export default function Projects() {
 			<div className="relative z-10 max-w-7xl mx-auto px-4">
 				{/* Epic Header */}
 				<div className="text-center mb-20">
-					<h2 className="text-5xl lg:text-7xl font-black mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text leading-tight">
+					<h2 className="text-4xl lg:text-7xl break-words font-black mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text leading-tight">
 						<SplitText
 							as="span"
-							className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text inline-block"
+							className="bg-gradient-to-r break-words from-primary via-secondary to-primary bg-clip-text inline-block"
 							text={projectComponent.heading}
-							splitType="chars"
+							splitType="words"
 							from={{ opacity: 0, y: 40 }}
 							to={{ opacity: 1, y: 0 }}
 							threshold={0.2}
@@ -329,7 +329,7 @@ export default function Projects() {
 				</div>
 
 				{/* Epic Projects Grid */}
-				<div className="space-y-24">
+				<div className="space-y-16 md:space-y-20 lg:space-y-24">
 					{projectComponent.projects.map((project, index) => (
 						<ProjectCard
 							key={project.id}
@@ -372,59 +372,85 @@ function ProjectCard({
 			<div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
 			<div
-				className={`grid lg:grid-cols-2 gap-0 ${
+				className={`grid lg:grid-cols-2 gap-4 md:gap-0 ${
 					index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
 				}`}
 			>
 				{/* Epic Image Section */}
 				<div
-					className={`relative h-80 lg:h-[500px] overflow-hidden ${
+					className={`relative h-64 sm:h-72 md:h-80 lg:h-[500px] overflow-hidden ${
 						index % 2 === 1 ? "lg:col-start-2" : ""
 					}`}
 				>
 					<SmartImage
 						src={project.image || "/placeholder.svg"}
 						alt={project.name}
-						className="w-full h-full object-contain p-12 transition-transform duration-700 group-hover:scale-110"
+						className="w-full h-full object-contain p-8 sm:p-8 md:p-10 lg:p-12 transition-transform duration-700 group-hover:scale-110"
 						containerClassName="w-full h-full"
 					/>
 					<div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
 					{/* Epic Overlay Badge */}
-					<div className="absolute top-6 left-6">
-						<div className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/80 backdrop-blur-sm border border-white/20">
+					<div className="absolute top-3 left-3 md:top-6 md:left-6">
+						<div className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-black/80 backdrop-blur-sm border border-white/20">
 							<Target className="w-4 h-4 text-primary" />
-							<span className="text-white text-sm font-medium">
+							<span className="text-white text-xs md:text-sm font-medium">
 								Mission Complete
 							</span>
 						</div>
 					</div>
 
-					{/* Epic Impact Metrics Overlay */}
+					{/* Epic Impact Metrics */}
 					{project.impact && (
-						<div className="absolute bottom-6 left-6 right-6">
-							<div className="grid grid-cols-3 gap-3">
-								{project.impact.map((impact, idx) => (
-									<div
-										key={idx}
-										className="text-center p-3 rounded-lg bg-black/80 backdrop-blur-sm border border-white/20"
-									>
-										<div className="text-primary font-bold text-lg">
-											{impact.value}
+						<>
+							{/* Overlay on md+ only */}
+							<div className="hidden md:block absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6">
+								<div className="grid grid-cols-3 gap-3">
+									{project.impact.map((impact, idx) => (
+										<div
+											key={idx}
+											className="text-center p-3 rounded-lg bg-black/80 backdrop-blur-sm border border-white/20"
+										>
+											<div className="text-primary font-bold text-lg">
+												{impact.value}
+											</div>
+											<div className="text-white text-xs">
+												{impact.metric}
+											</div>
 										</div>
-										<div className="text-white text-xs">
-											{impact.metric}
-										</div>
-									</div>
-								))}
+									))}
+								</div>
 							</div>
-						</div>
+
+							{/* Inline below image on small screens: rendered outside image container */}
+						</>
 					)}
 				</div>
 
+				{/* Small-screen impact metrics below image */}
+				{project.impact && (
+					<div className="md:hidden px-4 pb-4 pt-3">
+						<div className="grid grid-cols-2 gap-3">
+							{project.impact.map((impact, idx) => (
+								<div
+									key={idx}
+									className="text-center p-3 rounded-lg bg-black/60 border border-white/10"
+								>
+									<div className="text-primary font-bold text-base">
+										{impact.value}
+									</div>
+									<div className="text-white text-xs">
+										{impact.metric}
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+				)}
+
 				{/* Epic Content Section */}
 				<CardContent
-					className={`p-8 lg:p-16 flex flex-col justify-center ${
+					className={`p-6 md:p-8 lg:p-16 flex flex-col justify-center ${
 						index % 2 === 1 ? "lg:col-start-1" : ""
 					}`}
 				>

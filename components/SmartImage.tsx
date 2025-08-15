@@ -41,18 +41,20 @@ export default function SmartImage({
   }, [src]);
 
   return (
-    <div className={`relative ${containerClassName}`}>
-      {/* Background layer */}
-      {!isLoading && backgroundClass && (
-        <div className={`absolute inset-0 ${backgroundClass} rounded-lg`} />
-      )}
-      
-      {/* Image */}
-      <img
-        src={src}
-        alt={alt}
-        className={`relative z-10 ${className}`}
-      />
-    </div>
+		<div className={`relative ${containerClassName}`}>
+			{/* Background layer */}
+			{!isLoading && backgroundClass && (
+				<div
+					className={`absolute inset-0 ${backgroundClass} rounded-lg`}
+				/>
+			)}
+
+			{/* Image */}
+			<img
+				src={src}
+				alt={alt}
+				className={`relative z-10 block ${className}`}
+			/>
+		</div>
   );
 }
