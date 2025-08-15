@@ -80,13 +80,7 @@ Two workflow files are provided:
 - Basic release creation
 - Simple commit listing
 - Minimal configuration
-
-### `auto-release.yml` (Advanced Version)
-- Comprehensive release notes
-- Commit categorization
-- Pre-release detection
-- Better error handling
-- Artifact uploads
+- AI-enhanced release notes
 
 ## Monitoring Releases
 
