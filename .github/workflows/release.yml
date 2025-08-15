@@ -86,13 +86,11 @@ jobs:
           echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/$PREVIOUS_TAG...$CURRENT_TAG" >> release_notes.md
 
       - name: Setup Node.js for AI enhancement
-        if: ${{ vars.USE_LLM_RELEASE_NOTES == 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version: 20.19.0
 
       - name: Enhance What's New with AI
-        if: ${{ vars.USE_LLM_RELEASE_NOTES == 'true' }}
         run: node scripts/ai-release-notes.mjs || echo "AI enhancement skipped (non-fatal)"
 
       - name: Create Release
