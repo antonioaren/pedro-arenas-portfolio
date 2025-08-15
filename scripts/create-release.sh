@@ -215,6 +215,9 @@ generate_release_notes "$RANGE" "$NEW_TAG" "$RELEASE_NOTES_FILE"
 # Create annotated tag with release notes
 git tag -a "$NEW_TAG" -F "$RELEASE_NOTES_FILE"
 
+# Sign the tag
+git tag -s "$NEW_TAG" -F "$RELEASE_NOTES_FILE"
+
 # Push tag
 print_status "Pushing tag $NEW_TAG to origin..."
 git push origin "$NEW_TAG"
