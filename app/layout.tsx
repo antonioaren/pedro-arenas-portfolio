@@ -7,6 +7,7 @@ import SiteFooter from "@/components/SiteFooter";
 import { Toaster as ToastToaster } from "@/components/ui/toaster";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export const metadata: Metadata = {
 	title: "Pedro Arenas | Senior Frontend Engineer",
@@ -92,6 +93,7 @@ export default function RootLayout({
 					<Navigation />
 					<main>{children}</main>
 					<SiteFooter />
+					<ScrollToTop />
 					<ToastToaster />
 					<SpeedInsights />
 					<Analytics />
