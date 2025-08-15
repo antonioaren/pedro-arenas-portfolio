@@ -21,6 +21,7 @@ const socialIconByType: Record<SocialType, typeof Github> = {
 type AboutInfo = {
 	heading: string;
 	subheading: string;
+	list: string[];
 	ctas: Array<{
 		label: string;
 		href: string;
@@ -46,8 +47,13 @@ type AboutInfo = {
 const About: AboutInfo = {
 	// Hero A (default): Role + value + metrics for Senior Frontend/Full‑Stack roles
 	heading: "Senior Frontend Engineer (React/Next, Vue/Nuxt)",
-	subheading:
-		"I build fast, scalable web apps that move business metrics: −45% page‑load, −30% AWS costs, 500k+ monthly visitors without downtime. Available remote (EU).",
+	subheading: "I build fast, scalable web apps that move business metrics:",
+	list: [
+		"−45% page‑load",
+		"−30% AWS costs",
+		"500k+ monthly visitors without downtime",
+		"Available remote (EU)",
+	],
 	ctas: [
 		{
 			label: "Hire me",
@@ -209,12 +215,16 @@ export default function HeroAbout() {
 								initialDelay={0}
 							/>
 						</h1>
-						<p
-							ref={descriptionRef}
-							className="text-lg text-muted-foreground leading-relaxed"
-						>
+						<p className="text-lg text-muted-foreground leading-relaxed">
 							{About.subheading}
 						</p>
+						<ul className="text-lg text-muted-foreground leading-relaxed">
+							{About.list.map((item) => (
+								<li key={item} className="list-item">
+									{item}
+								</li>
+							))}
+						</ul>
 						<div
 							ref={ctasRef}
 							className="flex flex-wrap justify-center md:justify-start gap-4"

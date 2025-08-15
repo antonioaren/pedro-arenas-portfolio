@@ -9,11 +9,11 @@ import {
 	Calendar,
 	MapPin,
 	ArrowUpRight,
-	Zap,
 	Target,
 	TrendingUp,
-	ExternalLink,
 	Github,
+	ChevronDown,
+	ChevronUp,
 } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
@@ -276,6 +276,11 @@ const projectComponent: ProjectComponent = {
 
 export default function Projects() {
 	const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+	const [showAll, setShowAll] = useState<boolean>(false);
+
+	const allProjects = projectComponent.projects;
+	const visibleProjects = showAll ? allProjects : allProjects.slice(0, 2);
+	const remainingCount = Math.max(allProjects.length - 2, 0);
 
 	return (
 		<section
@@ -329,16 +334,81 @@ export default function Projects() {
 				</div>
 
 				{/* Epic Projects Grid */}
-				<div className="space-y-16 md:space-y-20 lg:space-y-24">
-					{projectComponent.projects.map((project, index) => (
-						<ProjectCard
-							key={project.id}
-							project={project}
-							index={index}
-							hoveredProject={hoveredProject}
-							setHoveredProject={setHoveredProject}
-						/>
-					))}
+				<div className="relative">
+					<div className="space-y-16 md:space-y-20 lg:space-y-24">
+						{visibleProjects.map((project, index) => (
+							<ProjectCard
+								key={project.id}
+								project={project}
+								index={index}
+								hoveredProject={hoveredProject}
+								setHoveredProject={setHoveredProject}
+							/>
+						))}
+					</div>
+
+					{!showAll && remainingCount > 0 && (
+						<div className="pointer-events-none absolute inset-x-0 -bottom-6 h-32 bg-gradient-to-t from-background to-transparent" />
+					)}
+				</div>
+
+				{/* Hidden preview + Toggle */}
+				{!showAll && remainingCount > 0 && (
+					<div className="mt-12 flex flex-col items-center gap-4">
+						<div className="group flex items-center gap-4">
+							<div className="flex -space-x-3">
+								{allProjects.slice(2, 5).map((p) => (
+									<div
+										key={p.id}
+										className="w-10 h-10 rounded-full overflow-hidden ring-2 ring-primary/30 bg-card/50 transition-all duration-300 saturate-0 opacity-70 blur-[0.5px] group-hover:opacity-100 group-hover:saturate-100 group-hover:blur-0"
+									>
+										<SmartImage
+											src={p.image || "/placeholder.svg"}
+											alt={p.name}
+											className="w-full h-full object-cover"
+											containerClassName="w-full h-full rounded-full overflow-hidden"
+										/>
+									</div>
+								))}
+							</div>
+							<span className="text-sm text-muted-foreground">
+								{remainingCount} more projects
+							</span>
+						</div>
+					</div>
+				)}
+
+				<div className="mt-4 flex justify-center">
+					<Button
+						size="sm"
+						className="group relative overflow-hidden"
+						onClick={() => {
+							if (showAll) {
+								setShowAll(false);
+								try {
+									document
+										.getElementById("projects")
+										?.scrollIntoView({
+											behavior: "smooth",
+											block: "start",
+										});
+								} catch {}
+							} else {
+								setShowAll(true);
+							}
+						}}
+						aria-expanded={showAll}
+					>
+						<span className="pr-2 font-medium">
+							{showAll ? "Show fewer" : "See all projects"}
+						</span>
+						{showAll ? (
+							<ChevronUp className="w-4 h-4 transition-transform" />
+						) : (
+							<ChevronDown className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
+						)}
+						<span className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity" />
+					</Button>
 				</div>
 			</div>
 		</section>
