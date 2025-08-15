@@ -137,3 +137,38 @@ To modify the release notes format or workflow behavior:
 3. Test with a new tag to verify changes
 
 The system is designed to be flexible and can be customized for your specific needs.
+
+---
+
+## AI Enhancements
+
+This repository can optionally enhance the "What's New" section of release notes using OpenAI, and suggest Conventional Commits messages before committing locally.
+
+### CI: LLM-Enhanced Release Notes
+
+- Enable by setting repository Variables/Secrets:
+  - Variable: `USE_LLM_RELEASE_NOTES=true`
+  - Secret: `OPENAI_API_KEY`
+- The workflow will:
+  - Generate `release_notes.md` as before
+  - If enabled, run `scripts/ai-release-notes.mjs` which rewrites only the content between `## What's New` and `## Commits in this release`
+  - The script preserves structure and adds concise summaries and references (e.g., `#123`) extracted from commit messages
+- Safe fallback: if the AI step fails, the original notes are kept
+
+### Local: AI Commit Message Suggestions
+
+- Husky hook `prepare-commit-msg` is installed.
+- Requirements:
+  - Run `pnpm install` once to set up Husky
+  - Ensure `OPENAI_API_KEY` is available in your shell
+- Behavior:
+  - When you run `git commit`, if there are staged changes, the hook calls `pnpm ai:commit-msg` which prepends a suggested Conventional Commits message to the commit buffer. You can edit or replace it freely.
+  - You can also run manually: `pnpm ai:commit-msg | pbcopy` to copy suggestion.
+
+### Configuration
+
+- Environment variables (optional):
+  - `OPENAI_MODEL` (default: `gpt-4o-mini`)
+  - `OPENAI_TEMPERATURE` (default: `0.2`)
+  - `LLM_PROVIDER` (default: `openai`)
+

@@ -81,6 +81,20 @@ jobs:
           echo "" >> release_notes.md
           echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/$PREVIOUS_TAG...$CURRENT_TAG" >> release_notes.md
 
+      - name: Setup Node.js for AI enhancement
+        if: ${{ secrets.OPENAI_API_KEY != '' && vars.USE_LLM_RELEASE_NOTES == 'true' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.19.0
+
+      - name: Enhance What's New with AI
+        if: ${{ secrets.OPENAI_API_KEY != '' && vars.USE_LLM_RELEASE_NOTES == 'true' }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          LLM_PROVIDER: openai
+          OPENAI_TEMPERATURE: '0.2'
+        run: node scripts/ai-release-notes.mjs || echo "AI enhancement skipped (non-fatal)"
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         env:

@@ -1,0 +1,15 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Only run if there are staged changes and OPENAI_API_KEY is set
+if [ -z "$(git diff --cached --name-only)" ]; then
+  exit 0
+fi
+
+if [ -z "$OPENAI_API_KEY" ]; then
+  exit 0
+fi
+
+pnpm ai:commit-msg "$1" || true
+
+
