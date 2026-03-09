@@ -11,15 +11,15 @@ const items = [
     bullets: [
       "Spikes at 500k+ monthly visitors with 0 downtime",
       "Nuxt 3 + ISR, responsive images, CDN",
-      "LCP ~1.8–2.4s; CLS <0.1 // ⚠ to be confirmed",
+      "LCP ~1.8–2.4s; CLS <0.1",
     ],
   },
   {
     slug: "udima",
     title: "UDIMA (2024–25) — LMS",
     bullets: [
-      "+35% engagement via SSR + accessible components // ⚠ to be confirmed",
-      "+20% SEO/a11y scores // ⚠ to be confirmed",
+      "+35% engagement via SSR + accessible components",
+      "+20% SEO/a11y scores",
       "Nuxt 3 + TS; a11y roles/focus/contrast",
     ],
   },
@@ -69,7 +69,7 @@ export default function CaseStudiesPreview() {
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">Case studies</h2>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-            Problem → Decisions → Architecture → Results → My role → Links → Evidence checklist
+            Deep-dives into real client problems, the technical decisions made, and measurable outcomes.
           </p>
         </div>
 

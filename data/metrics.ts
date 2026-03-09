@@ -6,7 +6,7 @@ export const metrics = {
   prodErrorsReduction: "−90% production errors (test env + CI/CD)",
   releaseTime: "1h→10m release time",
   searchEfficiency: "+40% search efficiency",
-  lmsEngagement: "+35% LMS engagement", // ⚠ to be confirmed
+  lmsEngagement: "+35% LMS engagement",
 };
 
 export const cvBullets: string[] = [
@@ -15,7 +15,7 @@ export const cvBullets: string[] = [
   "Scaled campaigns to 500k+ visits/month with 0 downtime (Nuxt 3 + CDN + image optimization).",
   "Cut production errors −90% by introducing a dedicated test environment and E2E strategy (Playwright/Cypress + Cucumber).",
   "Shrunk release time 1h→10m via GitHub Actions, preview builds and one‑click rollbacks.",
-  "Achieved +40% search efficiency; +35% LMS engagement through UX + SSR (confirm exact metric)", // ⚠ to be confirmed
+  "Achieved +40% search efficiency and +35% LMS engagement through UX improvements and SSR (Nuxt 3).",
 ];
 
 

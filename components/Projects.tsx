@@ -45,11 +45,11 @@ type ProjectComponent = {
 };
 
 const projectComponent: ProjectComponent = {
-	heading: "My Development Journey",
+	heading: "Selected Work",
 	subheading:
-		"From learning to leading: How real-world projects shaped my expertise",
+		"Client projects and products spanning frontend, full-stack, and engineering leadership",
 	narrative:
-		"I've always been someone eager to learn, so while finishing my studies, I took a full-stack course and learned by working on real projects with agencies like Lightbeee and Squaads. I worked on many different projects, gaining experience across the entire development spectrum. Currently, I'm focusing and getting interested in Generative AI projects and modern web technologies.",
+		"Over the past few years I've worked across agencies and product teams — Lightbeee, Squaads, and independent ventures — building everything from e-commerce platforms and LMS systems to AI-powered finance tools. My focus is on performance engineering, scalable architecture, and Generative AI integrations.",
 	projects: [
 		{
 			id: "udima",
