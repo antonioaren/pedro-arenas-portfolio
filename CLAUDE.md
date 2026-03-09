@@ -49,3 +49,15 @@ Create a `.env.local` with these values for local development.
 - `content/case-studies/*.mdx` — case study pages
 - `public/resume.pdf` — downloadable CV
 - `public/social-photo.webp` — profile/OG image
+
+## Self-improvement loop
+
+After completing any task, Claude must review its own output and catch common mistakes before finishing:
+
+1. **Run the linter** — `pnpm lint`. Fix all errors before committing.
+2. **Scan for leaked dev notes** — search for `// ⚠`, `TODO`, `FIXME`, `confirm`, `to be confirmed`, or `placeholder` in any file touched. Remove or resolve every instance before the change goes public.
+3. **Check copy quality** — re-read any user-facing text added or modified. Ask: does this sound like a senior engineer wrote it, or like a draft? Rewrite drafts.
+4. **Verify no template text is rendered** — if a string looks like an internal instruction (e.g. arrows, bullet-point schemas, writing prompts), replace it with real prose.
+5. **Confirm metrics are stated cleanly** — no parentheticals like `(confirm exact metric)` or uncertainty markers in rendered text.
+
+If any of the above checks fail, fix the issue and re-run the check before marking the task done.
